@@ -530,7 +530,8 @@
       "tiers": {
         "dsmp": "HT5",
         "hsmp": "LT5",
-        "mace": "HT5"
+        "mace": "HT5",
+        "crystal": "LT2"
       }
     }
   ]
