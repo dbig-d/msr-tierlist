@@ -289,7 +289,8 @@
         "nsmp": "HT4",
         "npot": "LT2",
         "mace": "LT3",
-        "dpot": "LT2"
+        "dpot": "LT2",
+        "hsmp": "LT2"
       }
     },
     {
