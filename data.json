@@ -547,7 +547,8 @@
       "name": "ThatYibble",
       "region": "",
       "tiers": {
-        "uhc": "LT3"
+        "uhc": "LT3",
+        "hsmp": "LT5"
       }
     }
   ]
