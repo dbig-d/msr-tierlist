@@ -547,7 +547,8 @@
         "uhc": "LT1",
         "sword": "LT1",
         "axe": "HT1",
-        "crystal": "HT3"
+        "crystal": "HT3",
+        "mace": "LT1"
       }
     }
   ]
