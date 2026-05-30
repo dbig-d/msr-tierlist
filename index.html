@@ -29,8 +29,8 @@
   --t1:#f5b73c;  /* gold   */
   --t2:#c3cedd;  /* silver */
   --t3:#cb7e47;  /* bronze */
-  --t4:#a974f0;  /* purple */
-  --t5:#7c8696;  /* gray   */
+  --t4:#6486ad;  /* unsaturated steel blue */
+  --t5:#7e8794;  /* gray   */
 }
 
 *{box-sizing:border-box;margin:0;padding:0}
@@ -361,7 +361,7 @@ function tierBadge(t){ return `<span class="tb t${tierDigit(t)} ${tierKind(t)}">
 function avatar(name, cls=""){
   const init=(name.replace(/[^a-zA-Z0-9]/g,"")[0]||"?").toUpperCase();
   return `<div class="avatar ${cls}">
-    <img src="https://mc-heads.net/avatar/${encodeURIComponent(name)}/96" loading="lazy"
+    <img src="https://minotar.net/avatar/${encodeURIComponent(name)}/96" loading="lazy"
          onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
     <span class="avatar-fallback">${init}</span></div>`;
 }
