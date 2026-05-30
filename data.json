@@ -504,7 +504,8 @@
       "region": "",
       "tiers": {
         "dsmp": "HT1",
-        "uhc": "HT2"
+        "uhc": "HT2",
+        "sword": "HT1"
       }
     }
   ]
