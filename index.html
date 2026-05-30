@@ -361,7 +361,7 @@ function tierBadge(t){ return `<span class="tb t${tierDigit(t)} ${tierKind(t)}">
 function avatar(name, cls=""){
   const init=(name.replace(/[^a-zA-Z0-9]/g,"")[0]||"?").toUpperCase();
   return `<div class="avatar ${cls}">
-    <img src="https://minotar.net/avatar/${encodeURIComponent(name)}/96" loading="lazy"
+    <img src="https://minotar.net/helm/${encodeURIComponent(name)}/96" loading="lazy"
          onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
     <span class="avatar-fallback">${init}</span></div>`;
 }
