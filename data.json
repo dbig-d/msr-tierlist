@@ -507,7 +507,8 @@
         "uhc": "HT2",
         "sword": "HT1",
         "axe": "LT1",
-        "npot": "LT1"
+        "npot": "LT1",
+        "crystal": "LT1"
       }
     }
   ]
