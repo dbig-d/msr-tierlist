@@ -529,7 +529,8 @@
       "region": "",
       "tiers": {
         "dsmp": "HT5",
-        "hsmp": "LT5"
+        "hsmp": "LT5",
+        "mace": "HT5"
       }
     }
   ]
