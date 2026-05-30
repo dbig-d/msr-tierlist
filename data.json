@@ -508,7 +508,8 @@
         "sword": "HT1",
         "axe": "LT1",
         "npot": "LT1",
-        "crystal": "LT1"
+        "crystal": "LT1",
+        "mace": "LT1"
       }
     }
   ]
