@@ -543,7 +543,8 @@
       "name": "Henrry999",
       "region": "",
       "tiers": {
-        "dsmp": "LT1"
+        "dsmp": "LT1",
+        "uhc": "LT1"
       }
     }
   ]
