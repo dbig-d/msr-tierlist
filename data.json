@@ -515,6 +515,13 @@
         "mace": "LT1",
         "sword": "HT1"
       }
+    },
+    {
+      "name": "fanaticloudy",
+      "region": "",
+      "tiers": {
+        "hsmp": "LT2"
+      }
     }
   ]
 }
