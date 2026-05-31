@@ -79,8 +79,8 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;color:inhe
 /* ---------- Header ---------- */
 header{
   position:sticky;top:0;z-index:50;
-  background:url("Images/Backgrounds/Top Background/Top Background 1.png") center/cover no-repeat;
   border-bottom:1px solid var(--line-soft);
+  overflow: hidden;
 }
 .head-inner{max-width:1200px;margin:0 auto;padding:13px 20px;display:flex;align-items:center;gap:18px;flex-wrap:wrap}
 .brand{display:flex;align-items:center;gap:13px}
@@ -503,6 +503,50 @@ async function init(){
   }
 }
 init();
+
+/* Cycle Header Backgrounds */
+function cycleBackgrounds() {
+  const backgrounds = [
+    "Images/Backgrounds/Top Background/Top Background 1.png",
+    "Images/Backgrounds/Top Background/Top Background 2.png",
+    "Images/Backgrounds/Top Background/Top Background 3.png"
+  ];
+  
+  const headerEl = document.querySelector('header');
+  
+  // Create two layers for a seamless cross-fade
+  const layer1 = document.createElement('div');
+  const layer2 = document.createElement('div');
+  [layer1, layer2].forEach(l => {
+    l.style.cssText = "position:absolute;inset:0;z-index:-1;background:center/cover no-repeat;transition:opacity 1.5s ease-in-out;";
+  });
+  
+  layer1.style.backgroundImage = `url("${backgrounds[0]}")`;
+  layer2.style.opacity = '0';
+  
+  headerEl.prepend(layer2);
+  headerEl.prepend(layer1);
+
+  let currentIndex = 0;
+  let activeLayer = layer1;
+  let idleLayer = layer2;
+
+  // Preload images to ensure smooth transitions
+  backgrounds.forEach(src => { const img = new Image(); img.src = src; });
+  
+  setInterval(() => {
+    currentIndex = (currentIndex + 1) % backgrounds.length;
+    idleLayer.style.backgroundImage = `url("${backgrounds[currentIndex]}")`;
+    
+    // Cross-fade: Bring idle layer to front, fade active layer out
+    setTimeout(() => {
+      idleLayer.style.opacity = '1';
+      activeLayer.style.opacity = '0';
+      [activeLayer, idleLayer] = [idleLayer, activeLayer];
+    }, 50);
+  }, 8000);
+}
+cycleBackgrounds();
 </script>
 </body>
 </html>
