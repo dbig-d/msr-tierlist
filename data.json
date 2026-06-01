@@ -550,13 +550,6 @@
         "uhc": "LT3",
         "hsmp": "LT5"
       }
-    },
-    {
-      "name": "Test",
-      "region": "",
-      "tiers": {
-        "sword": "LT2"
-      }
     }
   ]
 }
