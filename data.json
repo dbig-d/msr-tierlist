@@ -506,7 +506,10 @@
       "tiers": {
         "dsmp": "HT1",
         "uhc": "HT2",
-        "axe": "LT1",
+        "axe": {
+          "tier": "LT1",
+          "retired": true
+        },
         "npot": "LT1",
         "crystal": "LT1",
         "mace": "LT1",
