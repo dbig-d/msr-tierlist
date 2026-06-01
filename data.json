@@ -504,13 +504,34 @@
       "name": "MrP3nguin_",
       "region": "",
       "tiers": {
-        "dsmp": "HT1",
-        "uhc": "HT2",
-        "axe": "LT1",
-        "npot": "LT1",
-        "crystal": "LT1",
-        "mace": "LT1",
-        "sword": "HT1"
+        "dsmp": {
+          "tier": "HT1",
+          "retired": true
+        },
+        "uhc": {
+          "tier": "HT2",
+          "retired": true
+        },
+        "axe": {
+          "tier": "LT1",
+          "retired": true
+        },
+        "npot": {
+          "tier": "LT1",
+          "retired": true
+        },
+        "crystal": {
+          "tier": "LT1",
+          "retired": true
+        },
+        "mace": {
+          "tier": "LT1",
+          "retired": true
+        },
+        "sword": {
+          "tier": "HT1",
+          "retired": true
+        }
       }
     },
     {
@@ -535,15 +556,30 @@
       "name": "Henrry999",
       "region": "",
       "tiers": {
-        "dsmp": "LT1",
-        "uhc": "LT1",
+        "dsmp": {
+          "tier": "LT1",
+          "retired": true
+        },
+        "uhc": {
+          "tier": "LT1",
+          "retired": true
+        },
         "sword": {
           "tier": "LT1",
           "retired": true
         },
-        "axe": "HT1",
-        "crystal": "HT3",
-        "mace": "LT1"
+        "axe": {
+          "tier": "HT1",
+          "retired": true
+        },
+        "crystal": {
+          "tier": "HT3",
+          "retired": true
+        },
+        "mace": {
+          "tier": "LT1",
+          "retired": true
+        }
       }
     },
     {
