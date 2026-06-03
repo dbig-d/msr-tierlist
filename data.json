@@ -458,7 +458,10 @@
           "tier": "LT4",
           "retired": true
         },
-        "uhc": "LT4",
+        "uhc": {
+          "tier": "LT4",
+          "retired": true
+        },
         "mace": "LT5",
         "dsmp": "HT5",
         "nsmp": "HT5",
