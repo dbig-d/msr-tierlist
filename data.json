@@ -454,7 +454,10 @@
       "region": "",
       "premium": true,
       "tiers": {
-        "axe": "LT4",
+        "axe": {
+          "tier": "LT4",
+          "retired": true
+        },
         "uhc": "LT4",
         "mace": "LT5",
         "dsmp": "HT5",
