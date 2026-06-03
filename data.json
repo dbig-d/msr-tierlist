@@ -463,7 +463,10 @@
           "retired": true
         },
         "mace": "LT5",
-        "dsmp": "HT5",
+        "dsmp": {
+          "tier": "HT5",
+          "retired": true
+        },
         "nsmp": "HT5",
         "sword": {
           "tier": "HT5",
