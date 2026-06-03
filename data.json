@@ -462,7 +462,10 @@
           "tier": "LT4",
           "retired": true
         },
-        "mace": "LT5",
+        "mace": {
+          "tier": "LT5",
+          "retired": true
+        },
         "dsmp": {
           "tier": "HT5",
           "retired": true
