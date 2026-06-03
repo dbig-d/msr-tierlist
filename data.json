@@ -143,7 +143,10 @@
         "sword": "LT1",
         "axe": "LT1",
         "uhc": "LT1",
-        "mace": "HT1",
+        "mace": {
+          "tier": "HT1",
+          "retired": true
+        },
         "crystal": "LT1",
         "dsmp": "LT1",
         "nsmp": "HT2",
