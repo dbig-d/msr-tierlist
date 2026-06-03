@@ -485,7 +485,10 @@
       "region": "",
       "tiers": {
         "axe": "LT5",
-        "dsmp": "LT4",
+        "dsmp": {
+          "tier": "LT4",
+          "retired": true
+        },
         "sword": "HT5"
       }
     },
