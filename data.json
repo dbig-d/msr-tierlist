@@ -354,7 +354,10 @@
       "name": "g0d0rs4tan",
       "region": "",
       "tiers": {
-        "sword": "HT4",
+        "sword": {
+          "tier": "HT4",
+          "retired": true
+        },
         "axe": "LT5"
       }
     },
