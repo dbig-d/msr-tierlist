@@ -162,7 +162,6 @@
       "name": "icedcoffee",
       "region": "",
       "tiers": {
-        "dpot": "LT1",
         "npot": "LT1"
       }
     },
