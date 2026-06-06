@@ -625,6 +625,13 @@
         "uhc": "LT3",
         "hsmp": "LT5"
       }
+    },
+    {
+      "name": "TheBestMonster",
+      "region": "",
+      "tiers": {
+        "sword": "LT3"
+      }
     }
   ]
 }
