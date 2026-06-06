@@ -446,6 +446,10 @@ footer b{color:var(--text-dim)}
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
         <span>Premium</span>
       </button>
+      <button class="filter-chip" id="toggleSubTiers" title="Switch between Main and Sub Tiers">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+        <span>Sub Tiers</span>
+      </button>
     </div>
   </div>
 </header>
@@ -527,7 +531,7 @@ function avatar(name, cls=""){
     <span class="avatar-fallback">${init}</span></div>`;
 }
 
-let activeTab="overall", query="", region="", hideRetired=false, premiumOnly=false;
+let activeTab="overall", query="", region="", hideRetired=false, premiumOnly=false, showSubTiers=false;
 const isFullyRetired = p => {const v=Object.values(p.tiers); return v.length>0 && v.every(x=>tierInfo(x).retired);};
 
 /* region filter (auto-hides if no regions present) */
@@ -540,8 +544,11 @@ function buildRegionFilter(){
 
 function buildTabs(){
   const tabs=document.getElementById("tabs");
-  let html=`<button class="tab ${activeTab==="overall"?"active":""}" data-tab="overall"><span class="ic"><img src='Images/Icons/Trophy.png' style='height:1em; vertical-align: middle; transform:scale(3.5) translateY(-2px);'></span><span class="lb">Overall</span></button>`;
-  GAMEMODES.forEach(g=>{ html+=`<button class="tab ${activeTab===g.id?"active":""}" data-tab="${g.id}"><span class="ic">${g.icon}</span><span class="lb">${g.name}</span></button>`; });
+  let html="";
+  if(!showSubTiers) {
+    html=`<button class="tab ${activeTab==="overall"?"active":""}" data-tab="overall"><span class="ic"><img src='Images/Icons/Trophy.png' style='height:1em; vertical-align: middle; transform:scale(3.5) translateY(-2px);'></span><span class="lb">Overall</span></button>`;
+  }
+  GAMEMODES.filter(g => !!g.subtier === showSubTiers).forEach(g=>{ html+=`<button class="tab ${activeTab===g.id?"active":""}" data-tab="${g.id}"><span class="ic">${g.icon}</span><span class="lb">${g.name}</span></button>`; });
   html += `<div class="tab-indicator"></div>`;
   tabs.innerHTML=html;
 
@@ -703,8 +710,8 @@ function openInfo(tab) {
           <span style="padding:2px 8px;background:var(--bg-2);border:1px solid var(--line-soft);border-radius:6px">💥 Creeper</span>
           <span style="padding:2px 8px;background:var(--bg-2);border:1px solid var(--line-soft);border-radius:6px">🔥 Fireball</span>
           <span style="padding:2px 8px;background:var(--bg-2);border:1px solid var(--line-soft);border-radius:6px">❄️ Spleef</span>
-          <span style="padding:2px 8px;background:var(--bg-2);border:1px solid var(--line-soft);border-radius:6px">🔱 Trident</span>
-          <span style="padding:2px 8px;background:var(--bg-2);border:1px solid var(--line-soft);border-radius:6px">👁️ Pearl</span>
+          <span style="padding:2px 8px;background:var(--bg-2);border:1px solid var(--line-soft);border-radius:6px">⚔️ Spear Mace</span>
+          <span style="padding:2px 8px;background:var(--bg-2);border:1px solid var(--line-soft);border-radius:6px">👁️ Pearl Fight</span>
         </div>
         <h4 style="color:var(--text);margin-bottom:4px">Sub Tier Testers</h4>
         <div style="display:grid;grid-template-columns:1fr 1fr;gap:4px 12px;font-size:13px">
@@ -713,7 +720,7 @@ function openInfo(tab) {
           <div><b>__synn</b> — Fireball Fight 🔥</div>
           <div><b>D2ck000</b> — Creeper 💣</div>
           <div><b>Jaynaka15</b> — Spleef ❄️</div>
-          <div><b>cricketrlz</b> — Trident 🔱</div>
+          <div><b>cricketrlz</b> — Spear Mace ⚔️</div>
         </div>
       </div>`;
     } else {
@@ -920,6 +927,25 @@ const retiredChip=document.getElementById("filterRetired");
 const premiumChip=document.getElementById("filterPremium");
 retiredChip.onclick=()=>{hideRetired=!hideRetired;retiredChip.classList.toggle("active",hideRetired);render();};
 premiumChip.onclick=()=>{premiumOnly=!premiumOnly;premiumChip.classList.toggle("active",premiumOnly);render();};
+const subtierChip=document.getElementById("toggleSubTiers");
+subtierChip.onclick=()=>{
+  showSubTiers=!showSubTiers;
+  subtierChip.classList.toggle("active",showSubTiers);
+  
+  const filtered = GAMEMODES.filter(g => !!g.subtier === showSubTiers);
+  if(showSubTiers) {
+    // If switching to subtiers, Overall is hidden, so move to first subtier mode
+    if(activeTab === "overall" || (GM[activeTab] && !GM[activeTab].subtier)) {
+      if(filtered.length > 0) activeTab = filtered[0].id;
+    }
+  } else {
+    // Always return to Overall when leaving subtiers
+    activeTab = "overall";
+  }
+
+  buildTabs();
+  render();
+};
 
 /* ---- hover tooltip for tiers (works in Overall, gamemode columns, scroll-safe) ---- */
 const tipEl=document.createElement("div");tipEl.id="tip";document.body.appendChild(tipEl);
@@ -965,6 +991,17 @@ async function init(){
     if(!res.ok) throw new Error("HTTP "+res.status);
     const DATA=await res.json();
     GAMEMODES=DATA.gamemodes; PLAYERS=DATA.players; POINTS=DATA.points; TITLES=DATA.titles;
+
+    const subTierList = [
+      {id: "cart", name: "Cart", icon: "🛒", subtier: true},
+      {id: "creeper", name: "Creeper", icon: "💥", subtier: true},
+      {id: "fireball", name: "Fireball", icon: "🔥", subtier: true},
+      {id: "spleef", name: "Spleef", icon: "❄️", subtier: true},
+      {id: "spearmace", name: "Spear Mace", icon: "⚔️", subtier: true},
+      {id: "pearlfight", name: "Pearl Fight", icon: "👁️", subtier: true}
+    ];
+    subTierList.forEach(s => { if (!GAMEMODES.find(g => g.id === s.id)) GAMEMODES.push(s); });
+
     GM=Object.fromEntries(GAMEMODES.map(g=>[g.id,g]));
     buildRegionFilter(); buildTabs(); render();
   }catch(e){
