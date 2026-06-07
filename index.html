@@ -180,6 +180,12 @@ select:focus{border-color:var(--accent)}
 .tab .lb{line-height:1}
 .tab:hover{color:var(--text)}
 .tab:hover .ic{opacity:1;transform:scale(1.15)}
+.tab-switch{margin-left:auto;color:var(--accent)}
+.tab-switch .ic{color:var(--accent);opacity:.95}
+.tab-switch .ic svg{width:24px;height:24px}
+.tab-switch .lb{color:var(--accent);font-weight:700}
+.tab-switch::before{content:"";position:absolute;left:-1px;top:22%;height:56%;width:1px;background:var(--line-soft)}
+.tab-switch{position:relative}
 .tab.active{color:var(--text);background:linear-gradient(180deg,var(--panel),rgba(16,26,43,0))}
 .tab.active .ic{opacity:1}
 
@@ -250,6 +256,12 @@ main{max-width:1200px;margin:0 auto;padding:26px 20px 60px}
 .badge.title{background:linear-gradient(135deg,color-mix(in srgb,var(--bc) 70%,#ffffff),var(--bc) 52%,color-mix(in srgb,var(--bc) 76%,#000000))}
 .badge.premium{background:linear-gradient(135deg,#cfe2ff,var(--accent) 52%,#5f86c8)}
 .badge.retired{background:linear-gradient(135deg,#5d6878,#39434f 52%,#23282f);color:#eef3fa}
+.badge.tester{background:linear-gradient(135deg,#ffc879,#e8862c 52%,#9c5a17)}
+.badge.subtester{background:linear-gradient(135deg,#4cbf7a,#1f7a45 52%,#0e4a29);color:#eef7ef}
+.badge.house-blue{background:linear-gradient(135deg,#5b8de6,#2f5fc0 52%,#163a86);color:#eef3fa}
+.badge.house-red{background:linear-gradient(135deg,#ff8f8f,#e0454b 52%,#8f1f25);color:#fff}
+.badge.house-yellow{background:linear-gradient(135deg,#ffe79a,#f5c542 52%,#bf931c)}
+.badge.house-green{background:linear-gradient(135deg,#8fe6ad,#54c66b 52%,#2c8645)}
 
 /* stacked tier tiles: gamemode orb on top, coloured tier rectangle below (mctiers style) */
 .gm-strip{display:flex;gap:7px;flex-wrap:nowrap;justify-content:flex-start;max-width:100%;overflow-x:auto;scrollbar-width:none}
@@ -467,6 +479,14 @@ footer b{color:var(--text-dim)}
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
         <span>Premium</span>
       </button>
+      <button class="filter-chip" id="filterTesters" title="Show testers &amp; subtier testers only">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a4 4 0 0 0-5.4 5.4l-6.6 6.6a1.5 1.5 0 0 0 2.1 2.1l6.6-6.6a4 4 0 0 0 5.4-5.4l-2.4 2.4-2.1-2.1z"/></svg>
+        <span>Testers</span>
+      </button>
+      <button class="filter-chip" id="filterHouses" title="Cycle house filter: All → Blue → Red → Yellow → Green → Off">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11.5 12 4l9 7.5"/><path d="M5 10v9h14v-9"/><path d="M9.5 19v-5h5v5"/></svg>
+        <span class="fc-h-label">Houses</span>
+      </button>
     </div>
   </div>
 </header>
@@ -488,7 +508,7 @@ footer b{color:var(--text-dim)}
 /* ============================================================================
    ███  DATA  ███  — tier data lives in data.json (edit it, or use the Discord bot).
    ============================================================================ */
-let GAMEMODES, PLAYERS, POINTS, TITLES, GM;
+let GAMEMODES, PLAYERS, POINTS, TITLES, GM, SUBGAMEMODES=[], SUBGM={};
 
 /* ============================================================================
    ███  ENGINE — no need to edit below  ███
@@ -525,12 +545,31 @@ function gmPlaceholder(g){
 const BADGE_GEM=`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"><path d="M6 3h12l4 6-10 12L2 9z"/><path d="M2 9h20M6 3l6 6 6-6M12 9v12" stroke-width="1" opacity=".5"/></svg>`;
 const STAR_SVG=`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>`;
 const RETIRE_SVG=`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><line x1="8" y1="12" x2="16" y2="12"/></svg>`;
-function playerBadges(p,t){
-  let b=`<span class="badge title" style="--bc:${t.color}">${BADGE_GEM}<span>${t.name}</span></span>`;
-  if(p.premium) b+=`<span class="badge premium">${STAR_SVG}<span>Premium</span></span>`;
-  if(isFullyRetired(p)) b+=`<span class="badge retired">${RETIRE_SVG}<span>Retired</span></span>`;
-  return `<div class="badges">${b}</div>`;
+const TESTER_SVG=`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a4 4 0 0 0-5.4 5.4l-6.6 6.6a1.5 1.5 0 0 0 2.1 2.1l6.6-6.6a4 4 0 0 0 5.4-5.4l-2.4 2.4-2.1-2.1z"/></svg>`;
+const HOUSE_SVG=`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11.5 12 4l9 7.5"/><path d="M5 10v9h14v-9"/><path d="M9.5 19v-5h5v5"/></svg>`;
+const SWITCH_SVG=`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8h13l-3-3M20 16H7l3 3"/></svg>`;
+const HOUSES={blue:{name:"Blue"},red:{name:"Red"},yellow:{name:"Yellow"},green:{name:"Green"}};
+
+/* Build every badge a player has, in priority order:
+   title > tester > subtier tester > retired > house > premium.
+   Overall shows the top 3; the profile shows all. */
+function badgeDefs(p,t){
+  const arr=[];
+  const titleSub = t.min>0 ? `Achieved ${t.min}+ total points` : `Default rank for new players`;
+  arr.push({cls:"title",style:`--bc:${t.color}`,icon:BADGE_GEM,label:t.name,tipT:t.name,tipS:titleSub});
+  if(p.tester) arr.push({cls:"tester",icon:TESTER_SVG,label:"Tester",tipT:"Tester",tipS:"Main tester for unranked players"});
+  if(p.subtester){const gm=SUBGM[p.subtester]; const nm=gm?gm.name:p.subtester; arr.push({cls:"subtester",icon:TESTER_SVG,label:"Subtier Tester",tipT:"Subtier Tester",tipS:`Main tester for ${nm}`});}
+  if(isFullyRetired(p)) arr.push({cls:"retired",icon:RETIRE_SVG,label:"Retired",tipT:"Retired",tipS:"Fully retired in all tested gamemodes"});
+  if(p.house&&HOUSES[p.house]) arr.push({cls:"house-"+p.house,icon:HOUSE_SVG,label:HOUSES[p.house].name+" House",tipT:HOUSES[p.house].name+" House",tipS:HOUSES[p.house].name+" House member"});
+  if(p.premium) arr.push({cls:"premium",icon:STAR_SVG,label:"Premium",tipT:"Premium",tipS:"Gained premium status through the Discord"});
+  return arr;
 }
+function renderBadges(p,t,cap){
+  let arr=badgeDefs(p,t);
+  if(cap) arr=arr.slice(0,cap);
+  return arr.map(b=>`<span class="badge ${b.cls}"${b.style?` style="${b.style}"`:""} data-tip-title="${b.tipT}" data-tip-sub="${b.tipS}">${b.icon}<span>${b.label}</span></span>`).join("");
+}
+function playerBadges(p,t){ return `<div class="badges">${renderBadges(p,t,3)}</div>`; }
 
 /* accolade/title emblem. If a title has an "icon" in data.json it's used;
    otherwise a faceted gem is drawn in the title colour (easy to swap later). */
@@ -548,7 +587,7 @@ function avatar(name, cls=""){
     <span class="avatar-fallback">${init}</span></div>`;
 }
 
-let activeTab="overall", query="", region="", hideRetired=false, premiumOnly=false;
+let activeTab="overall", query="", region="", hideRetired=false, premiumOnly=false, testerOnly=false, houseFilter="off", tabMode="main";
 const isFullyRetired = p => {const v=Object.values(p.tiers); return v.length>0 && v.every(x=>tierInfo(x).retired);};
 
 /* region filter (auto-hides if no regions present) */
@@ -561,8 +600,17 @@ function buildRegionFilter(){
 
 function buildTabs(){
   const tabs=document.getElementById("tabs");
-  let html=`<button class="tab ${activeTab==="overall"?"active":""}" data-tab="overall"><span class="ic"><img src='Images/Icons/Trophy.png' style='height:1em; vertical-align: middle; transform:scale(3.5) translateY(-2px);'></span><span class="lb">Overall</span></button>`;
-  GAMEMODES.forEach(g=>{ html+=`<button class="tab ${activeTab===g.id?"active":""}" data-tab="${g.id}"><span class="ic">${g.icon}</span><span class="lb">${g.name}</span></button>`; });
+  let html="";
+  if(tabMode==="main"){
+    html+=`<button class="tab ${activeTab==="overall"?"active":""}" data-tab="overall"><span class="ic"><img src='Images/Icons/Trophy.png' style='height:1em; vertical-align: middle; transform:scale(3.5) translateY(-2px);'></span><span class="lb">Overall</span></button>`;
+    GAMEMODES.forEach(g=>{ html+=`<button class="tab ${activeTab===g.id?"active":""}" data-tab="${g.id}"><span class="ic">${g.icon}</span><span class="lb">${g.name}</span></button>`; });
+  } else {
+    SUBGAMEMODES.forEach(g=>{ html+=`<button class="tab ${activeTab===g.id?"active":""}" data-tab="${g.id}"><span class="ic">${g.icon||""}</span><span class="lb">${g.name}</span></button>`; });
+  }
+  if(SUBGAMEMODES.length){
+    const swText = tabMode==="main" ? "Switch to Subtiers" : "Switch to Maintiers";
+    html+=`<button class="tab tab-switch" data-switch="1"><span class="ic">${SWITCH_SVG}</span><span class="lb">${swText}</span></button>`;
+  }
   html += `<div class="tab-indicator"></div>`;
   tabs.innerHTML=html;
 
@@ -574,12 +622,12 @@ function buildTabs(){
   }
 
   tabs.querySelectorAll(".tab").forEach(b=>b.onclick=()=>{
+    if(b.dataset.switch){ toggleTabMode(); return; }
     const updateUI = () => {
       activeTab = b.dataset.tab;
       buildTabs();
       render();
     };
-    // Use View Transitions API if supported, otherwise fallback to standard update
     if (document.startViewTransition) {
       document.startViewTransition(updateUI);
     } else {
@@ -588,10 +636,25 @@ function buildTabs(){
   });
 }
 
+function toggleTabMode(){
+  const update=()=>{
+    tabMode = tabMode==="main" ? "sub" : "main";
+    activeTab = tabMode==="main" ? "overall" : (SUBGAMEMODES[0] && SUBGAMEMODES[0].id);
+    buildTabs();
+    render();
+  };
+  if(document.startViewTransition) document.startViewTransition(update); else update();
+}
+
 function matchPlayer(p){
   if(region && p.region!==region) return false;
   if(query && !p.name.toLowerCase().includes(query)) return false;
   if(premiumOnly && !p.premium) return false;
+  if(testerOnly && !(p.tester||p.subtester)) return false;
+  if(houseFilter!=="off"){
+    if(houseFilter==="all"){ if(!p.house) return false; }
+    else if(p.house!==houseFilter) return false;
+  }
   return true;
 }
 
@@ -640,17 +703,19 @@ function renderOverall(){
 }
 
 function renderGamemode(gid){
-  const g=GM[gid];
+  const sub = tabMode==="sub";
+  const g = sub ? SUBGM[gid] : GM[gid];
+  if(!g){ document.getElementById("content").innerHTML=""; return; }
   const byTier=Object.fromEntries(TIER_ORDER.map(t=>[t,[]]));
-  PLAYERS.forEach(p=>{const v=p.tiers[gid]; if(!v||!matchPlayer(p))return; const info=tierInfo(v); if(hideRetired&&info.retired)return; if(byTier[info.tier]) byTier[info.tier].push({p,info});});
+  PLAYERS.forEach(p=>{const obj=sub?(p.subtiers||{}):p.tiers; const v=obj[gid]; if(!v||!matchPlayer(p))return; const info=tierInfo(v); if(hideRetired&&info.retired)return; if(byTier[info.tier]) byTier[info.tier].push({p,info});});
   Object.values(byTier).forEach(a=>a.sort((x,y)=>x.p.name.localeCompare(y.p.name)));
   const total=Object.values(byTier).reduce((s,a)=>s+a.length,0);
 
-  let html=`<div class="view-title"><h2>${g.icon} ${g.name}</h2><span class="sub">Tier list</span></div>
-  <div class="view-meta">${total} player${total!==1?"s":""} tested in ${g.name}</div><div class="cols">`;
+  let html=`<div class="view-title"><h2>${g.icon||""} ${g.name}</h2><span class="sub">${sub?"Subtier list":"Tier list"}</span></div>
+  <div class="view-meta">${total} player${total!==1?"s":""} tested in ${g.name}${sub?" (subtier — no points)":""}</div><div class="cols">`;
   TIER_ORDER.forEach((t,i)=>{
     const d=tierDigit(t),list=byTier[t];
-    const body=list.length?list.map(it=>{const p=it.p,info=it.info;const sub=`${info.tier} · ${tierPoints(info.tier)} points`;const rc=(info.retired||info.peak)?" entry-retired":"";return `<div class="entry${rc}" data-player="${encodeURIComponent(p.name)}" data-tip-title="${tierState(info)}" data-tip-sub="${sub}">${avatar(p.name)}<span class="en">${p.name}</span>${p.region?`<span class="region er">${p.region}</span>`:""}</div>`;}).join(""):`<div class="col-empty">—</div>`;
+    const body=list.length?list.map(it=>{const p=it.p,info=it.info;const sub2=`${info.tier} · ${tierPoints(info.tier)} points`;const rc=(info.retired||info.peak)?" entry-retired":"";return `<div class="entry${rc}" data-player="${encodeURIComponent(p.name)}" data-tip-title="${tierState(info)}" data-tip-sub="${sub2}">${avatar(p.name)}<span class="en">${p.name}</span>${p.region?`<span class="region er">${p.region}</span>`:""}</div>`;}).join(""):`<div class="col-empty">—</div>`;
     html+=`<div class="col t${d}" style="animation-delay:${i*28}ms"><div class="col-head">${t}<span class="ct">${tierPoints(t)} PTS</span></div><div class="col-body">${body}</div></div>`;
   });
   html+=`</div>`;
@@ -883,14 +948,8 @@ function openInfo(tab) {
   document.getElementById("modalBg").classList.add("open");
 }
 
-/* badge pills for the profile, each with a hover explanation */
-function profileBadges(p,t){
-  const titleSub = t.min>0 ? `Achieved ${t.min}+ total points` : `Default rank for new players`;
-  let b=`<span class="badge title" style="--bc:${t.color}" data-tip-title="${t.name}" data-tip-sub="${titleSub}">${BADGE_GEM}<span>${t.name}</span></span>`;
-  if(p.premium) b+=`<span class="badge premium" data-tip-title="Premium" data-tip-sub="Gained premium status through the Discord">${STAR_SVG}<span>Premium</span></span>`;
-  if(isFullyRetired(p)) b+=`<span class="badge retired" data-tip-title="Retired" data-tip-sub="Fully retired in all tested gamemodes">${RETIRE_SVG}<span>Retired</span></span>`;
-  return b;
-}
+/* badge pills for the profile: all of them, each with a hover explanation */
+function profileBadges(p,t){ return renderBadges(p,t,0); }
 function profileTierCard(g,val){
   const info=tierInfo(val), d=info.tier.slice(-1);
   const rc=(info.retired||info.peak)?" retired":"";
@@ -905,6 +964,9 @@ function openPlayer(name){
   const total=playerTotal(p),t=titleFor(total);
   const rank=PLAYERS.map(x=>({n:x.name,tot:playerTotal(x)})).sort((a,b)=>b.tot-a.tot).findIndex(x=>x.n===name)+1;
   const cards=GAMEMODES.map(g=>p.tiers[g.id]?profileTierCard(g,p.tiers[g.id]):profileEmptyCard(g)).join("");
+  const subObj=p.subtiers||{};
+  const subCards=SUBGAMEMODES.map(g=>subObj[g.id]?profileTierCard(g,subObj[g.id]):profileEmptyCard(g)).join("");
+  const subSection=SUBGAMEMODES.length?`<h4 style="margin-top:24px">Subtier Kits</h4><div class="tier-cards">${subCards}</div>`:"";
   const skin=`https://minotar.net/armor/body/${encodeURIComponent(name)}/100.png`;
   const init=(name.replace(/[^a-zA-Z0-9]/g,"")[0]||"?").toUpperCase();
   document.getElementById("modal").innerHTML=`
@@ -924,7 +986,7 @@ function openPlayer(name){
         </div>
       </div>
     </div>
-    <div class="modal-body"><h4>Kit Tiers</h4><div class="tier-cards">${cards}</div></div>`;
+    <div class="modal-body"><h4>Kit Tiers</h4><div class="tier-cards">${cards}</div>${subSection}</div>`;
   document.getElementById("modalBg").classList.add("open");
 }
 function closeModal(){document.getElementById("modalBg").classList.remove("open");}
@@ -937,11 +999,11 @@ function render(){
   const overlay = document.getElementById('tabOverlay');
   let iconHtml = '';
 
-  if (activeTab === 'overall') {
+  if (tabMode==="main" && activeTab === 'overall') {
     iconHtml = `<img src="Images/Icons/Trophy.png" alt="Overall">`;
   } else {
-    const gm = GAMEMODES.find(g => g.id === activeTab);
-    if (gm) iconHtml = gm.icon;
+    const gm = (tabMode==="sub"?SUBGAMEMODES:GAMEMODES).find(g => g.id === activeTab);
+    if (gm) iconHtml = gm.icon || '';
   }
 
   if (iconHtml) {
@@ -951,7 +1013,7 @@ function render(){
     document.body.classList.remove('has-tab-overlay');
     if (overlay) overlay.innerHTML = '';
   }
-  activeTab==="overall"?renderOverall():renderGamemode(activeTab);
+  (tabMode==="main" && activeTab==="overall") ? renderOverall() : renderGamemode(activeTab);
 }
 document.getElementById("search").oninput=e=>{query=e.target.value.trim().toLowerCase();render();};
 document.getElementById("regionFilter").onchange=e=>{region=e.target.value;render();};
@@ -961,6 +1023,25 @@ const retiredChip=document.getElementById("filterRetired");
 const premiumChip=document.getElementById("filterPremium");
 retiredChip.onclick=()=>{hideRetired=!hideRetired;retiredChip.classList.toggle("active",hideRetired);render();};
 premiumChip.onclick=()=>{premiumOnly=!premiumOnly;premiumChip.classList.toggle("active",premiumOnly);render();};
+
+const testerChip=document.getElementById("filterTesters");
+testerChip.onclick=()=>{testerOnly=!testerOnly;testerChip.classList.toggle("active",testerOnly);render();};
+
+const houseChip=document.getElementById("filterHouses");
+const HOUSE_CYCLE=["off","all","blue","red","yellow","green"];
+const HOUSE_META={off:["Houses",""],all:["All Houses","var(--accent)"],blue:["Blue","#5b8de6"],red:["Red","#e0454b"],yellow:["Yellow","#f5c542"],green:["Green","#54c66b"]};
+function updateHouseChip(){
+  const [label,color]=HOUSE_META[houseFilter];
+  houseChip.querySelector(".fc-h-label").textContent=label;
+  houseChip.classList.toggle("active",houseFilter!=="off");
+  if(houseFilter!=="off"){ houseChip.style.color=color; houseChip.style.borderColor=color; houseChip.style.background=`color-mix(in srgb, ${color} 14%, transparent)`; }
+  else { houseChip.style.color=""; houseChip.style.borderColor=""; houseChip.style.background=""; }
+}
+houseChip.onclick=()=>{
+  houseFilter=HOUSE_CYCLE[(HOUSE_CYCLE.indexOf(houseFilter)+1)%HOUSE_CYCLE.length];
+  updateHouseChip();
+  render();
+};
 
 /* ---- hover tooltip for tiers (works in Overall, gamemode columns, scroll-safe) ---- */
 const tipEl=document.createElement("div");tipEl.id="tip";document.body.appendChild(tipEl);
@@ -1006,7 +1087,9 @@ async function init(){
     if(!res.ok) throw new Error("HTTP "+res.status);
     const DATA=await res.json();
     GAMEMODES=DATA.gamemodes; PLAYERS=DATA.players; POINTS=DATA.points; TITLES=DATA.titles;
+    SUBGAMEMODES=DATA.subgamemodes||[];
     GM=Object.fromEntries(GAMEMODES.map(g=>[g.id,g]));
+    SUBGM=Object.fromEntries(SUBGAMEMODES.map(g=>[g.id,g]));
     buildRegionFilter(); buildTabs(); render();
   }catch(e){
     content.innerHTML=`<div class="empty-state">Couldn't load tier data (${e.message}).<br>Make sure <b>data.json</b> is in the same folder as index.html.</div>`;
