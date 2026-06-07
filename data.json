@@ -411,7 +411,8 @@
         "sword": "HT3",
         "mace": "HT2",
         "crystal": "LT2"
-      }
+      },
+      "house": "red"
     },
     {
       "name": "BigA_1",
