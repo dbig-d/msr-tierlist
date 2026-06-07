@@ -279,7 +279,8 @@
         "dpot": "LT4",
         "npot": "HT4",
         "hsmp": "HT3"
-      }
+      },
+      "house": "yellow"
     },
     {
       "name": "Velox2102",
