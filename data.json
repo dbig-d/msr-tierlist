@@ -196,7 +196,8 @@
         "hsmp": "LT1"
       },
       "subtiers": {
-        "pearl": "HT3"
+        "pearl": "HT3",
+        "cart": "HT3"
       }
     },
     {
