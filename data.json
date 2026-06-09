@@ -587,7 +587,8 @@
       "tiers": {
         "uhc": "HT3",
         "dsmp": "HT4",
-        "hsmp": "HT3"
+        "hsmp": "HT3",
+        "mace": "HT4"
       }
     },
     {
