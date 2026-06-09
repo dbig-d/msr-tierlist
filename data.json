@@ -185,10 +185,7 @@
           "tier": "HT1",
           "retired": true
         },
-        "crystal": {
-          "tier": "LT1",
-          "retired": true
-        },
+        "crystal": "LT1",
         "dsmp": "LT1",
         "nsmp": "LT1",
         "dpot": "HT2",
