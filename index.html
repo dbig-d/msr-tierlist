@@ -3,9 +3,17 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="description" content="MSR - Minecraft Server Ranked Tier List">
+<meta name="theme-color" content="#070c14">
 <title>MSR — Minecraft Server Ranked</title>
+<!-- DNS Prefetch for external resources -->
+<link rel="dns-prefetch" href="https://fonts.googleapis.com">
+<link rel="dns-prefetch" href="https://fonts.gstatic.com">
+<link rel="dns-prefetch" href="https://minotar.net">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;500;600;700&family=Outfit:wght@300;400;500;600;700&display=swap">
 <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;500;600;700&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
 /* =====================================================================
@@ -50,13 +58,19 @@
 }
 
 *{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth}
+/* Respect user motion preferences */
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:0.01ms!important;animation-iteration-count:1!important;transition-duration:0.01ms!important;scroll-behavior:auto!important}
+}
+html{scroll-behavior:smooth;overflow-x:hidden}
 body{
   font-family:'Outfit',sans-serif;
   color:var(--text);
   min-height:100vh;
   -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
   overflow-x:hidden;
+  font-size:14px;
 }
 body::before{
   content:"";position:fixed;inset:0;z-index:-3;
@@ -64,19 +78,23 @@ body::before{
     radial-gradient(900px 520px at 82% -12%, rgba(var(--glow-rgb),.13), transparent 60%),
     radial-gradient(760px 600px at -5% 105%, rgba(var(--glow-rgb),.07), transparent 55%),
     linear-gradient(180deg, var(--bg) 75%, var(--accent) 100%);
+  will-change:background;
+  contain:strict;
 }
 body::after{
   content:"";position:fixed;inset:0;z-index:-2;pointer-events:none;
   background-image:
-    linear-gradient(rgba(123,196,255,.022) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(116, 48, 48, 0.022) 1px, transparent 1px);
+    linear-gradient(rgba(123,196,255,.018) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(116, 48, 48, 0.018) 1px, transparent 1px);
   background-size:34px 34px;
   mask-image:radial-gradient(ellipse 80% 70% at 50% 0%, var(--accent) 30%, transparent 90%);
+  will-change:mask;
+  contain:layout style paint;
 }
 
-/* Floating Bubbles Effect */
-.bubbles-container{position:fixed;top:0;left:0;width:100%;height:100%;z-index:-1;pointer-events:none;overflow:hidden}
-.bubble{position:absolute;bottom:-100px;background:rgba(var(--glow-rgb),0.15);border-radius:50%;animation:float-bubble 15s infinite ease-in}
+/* Floating Bubbles Effect - Optimized */
+.bubbles-container{position:fixed;top:0;left:0;width:100%;height:100%;z-index:-1;pointer-events:none;overflow:hidden;will-change:transform}
+.bubble{position:absolute;bottom:-100px;background:rgba(var(--glow-rgb),0.15);border-radius:50%;animation:float-bubble 15s infinite ease-in;will-change:transform}
 .bubble:nth-child(1){width:40px;height:40px;left:10%;animation-duration:12s;animation-delay:1s}
 .bubble:nth-child(2){width:20px;height:20px;left:30%;animation-duration:18s;animation-delay:3s}
 .bubble:nth-child(3){width:50px;height:50px;left:55%;animation-duration:15s;animation-delay:0s}
@@ -122,7 +140,7 @@ header{
   -webkit-background-clip: text; background-clip: text;
   -webkit-text-fill-color: transparent; color:transparent;
   filter:drop-shadow(0 0 10px rgba(var(--glow-rgb),.4));
-  animation:brandShine 7s linear infinite;
+  animation:brandShine 8s linear infinite;
 }
 @keyframes brandShine{0%{background-position:0 0}100%{background-position:220% 0}}
 .brand-text p{font-size:11px;color:white;letter-spacing:1.6px;text-transform:uppercase;margin-top:4px;opacity:.85}
@@ -162,18 +180,27 @@ select:focus{border-color:var(--accent)}
 
 /* ---------- Tabs ---------- */
  .tabs-bar{
-  position:sticky;top:64px;z-index:40;background:rgba(7,12,20,.84);backdrop-filter:blur(14px);
+  position:sticky;top:64px;z-index:40;background:rgba(7,12,20,.88);backdrop-filter:blur(8px);
   border-bottom:1px solid var(--line-soft);
   transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.4s ease;
+  will-change:transform;
+  contain:layout style;
  }
  .tabs-bar.is-hidden{transform:translateY(-100%);opacity:0;pointer-events:none}
 
  /* View Transitions: Smoothly transition the content area when switching tabs */
  #content { view-transition-name: tab-content; }
- ::view-transition-old(tab-content) { animation: 180ms ease-in both slide-out; }
- ::view-transition-new(tab-content) { animation: 300ms cubic-bezier(0.16, 1, 0.3, 1) both slide-in; }
- @keyframes slide-in { from { opacity: 0; transform: translateX(30px); } }
- @keyframes slide-out { to { opacity: 0; transform: translateX(-30px); } }
+
+ /* Horizontal Tab Sliding (Directional) */
+ html.tab-slide-right::view-transition-old(tab-content) { animation: 200ms ease-in both slide-to-left; }
+ html.tab-slide-right::view-transition-new(tab-content) { animation: 350ms cubic-bezier(0.16, 1, 0.3, 1) both slide-from-right; }
+ html.tab-slide-left::view-transition-old(tab-content) { animation: 200ms ease-in both slide-to-right; }
+ html.tab-slide-left::view-transition-new(tab-content) { animation: 350ms cubic-bezier(0.16, 1, 0.3, 1) both slide-from-left; }
+
+ @keyframes slide-to-left { to { opacity: 0; transform: translateX(-30px); } }
+ @keyframes slide-from-right { from { opacity: 0; transform: translateX(30px); } }
+ @keyframes slide-to-right { to { opacity: 0; transform: translateX(30px); } }
+ @keyframes slide-from-left { from { opacity: 0; transform: translateX(-30px); } }
 
  /* Overall Mode Switch Animations */
  html.switching-modes::view-transition-backdrop {
@@ -276,21 +303,39 @@ main{max-width:1200px;margin:0 auto;padding:26px 20px 60px}
 .view-meta{color:var(--text-faint);font-size:13px;margin-bottom:22px}
 
 /* ---------- Overall list ---------- */
-.board{display:flex;flex-direction:column;gap:9px}
+.board{display:flex;flex-direction:column;gap:9px;contain:layout style}
 @supports(grid-template-columns:subgrid){
   @media(min-width:851px){
-    .board{display:grid;grid-template-columns:54px 46px 1fr 176px minmax(0,auto);gap:9px 14px}
-    .board>.row,.board>.board-head{grid-column:1 / -1;grid-template-columns:subgrid}
+    .board{display:grid;grid-template-columns:48px 42px 1fr 164px minmax(0,auto);gap:6px}
+    .board>.row, .board>.board-head{grid-column:1 / -1;grid-template-columns:subgrid;padding:6px 12px;gap:12px}
   }
 }
 .row{
   display:grid;grid-template-columns:54px 46px 1fr 176px minmax(0,auto);align-items:center;gap:14px;
   background:linear-gradient(180deg,var(--panel),var(--bg-2));
-  border:1px solid var(--line-soft);border-radius:13px;padding:14px 16px;cursor:pointer;transition:.16s;animation:rise .5s both;
+  border:1px solid var(--line-soft);border-radius:13px;padding:10px 12px;cursor:pointer;transition:.16s;animation:rise .5s both;
+  content-visibility:auto;
+  contain:layout style paint;
+}
+@media(min-width:851px){
+  .row:not([style*="subgrid"]){grid-template-columns:48px 42px 1fr 164px minmax(0,auto);padding:6px 12px;gap:12px}
+  .rank{font-size:16px}
+  .row.top1 .rank,.row.top2 .rank,.row.top3 .rank{font-size:19px}
+  .avatar{width:32px;height:32px;border-radius:7px}
+  .pname{font-size:13.5px}
+  .ptitle{margin-top:1px}
+  .points{font-size:13px}
+  .badges{gap:4px}
+  .badge{padding:4px 9px;font-size:10.5px}
+  .gm-tile{width:38px;gap:4px}
+  .gm-orb{width:34px;height:34px}
+  .gm-orb .ic img{width:26px!important;height:26px!important}
+  .gm-rect{font-size:10px;padding:2px 0}
+  .board-head:not([style*="subgrid"]){grid-template-columns:48px 42px 1fr 164px minmax(0,auto);gap:12px;margin-bottom:8px}
 }
 @keyframes rise{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
 .row:hover{border-color:var(--line);transform:translateX(3px);background:linear-gradient(180deg,var(--panel-2),var(--bg-2))}
-.rank{font-family:'Chakra Petch',sans-serif;font-weight:700;font-size:20px;text-align:center;color:var(--text-faint)}
+.rank{font-family:'Chakra Petch',sans-serif;font-weight:700;font-size:18px;text-align:center;color:var(--text-faint)}
 .row.top1 .rank,.row.top2 .rank,.row.top3 .rank{font-size:22px}
 .row.top1{border-color:rgba(245,183,60,.45);box-shadow:0 0 20px rgba(245,183,60,.15);background:linear-gradient(135deg,rgba(245,183,60,.22) 0%,var(--panel) 100%)}
 .row.top1:hover{background:linear-gradient(135deg,rgba(245,183,60,.3) 0%,var(--panel-2) 100%);box-shadow:0 0 28px rgba(245,183,60,.25)}
@@ -307,17 +352,18 @@ main{max-width:1200px;margin:0 auto;padding:26px 20px 60px}
 .row.premium{border-color:rgba(var(--glow-rgb),.5);box-shadow:0 0 0 1px rgba(var(--glow-rgb),.14), 0 6px 26px rgba(var(--glow-rgb),.09)}
 .rank small{display:block;font-size:9px;font-weight:600;letter-spacing:1px;color:var(--text-faint)}
 
-.avatar{position:relative;width:42px;height:42px;border-radius:8px;overflow:hidden;background:var(--panel-2);border:1px solid var(--line)}
-.avatar img{width:100%;height:100%;display:block;image-rendering:pixelated}
+.avatar{position:relative;width:36px;height:36px;border-radius:8px;overflow:hidden;background:var(--panel-2);border:1px solid var(--line);contain:strict}
+.avatar img{width:100%;height:100%;display:block;image-rendering:pixelated;content-visibility:auto}
 .avatar-fallback{display:none;position:absolute;inset:0;align-items:center;justify-content:center;font-family:'Chakra Petch';font-weight:700;font-size:18px;color:var(--text-dim);background:linear-gradient(140deg,#1d2c40,#13202f)}
 .pinfo{min-width:0}
-.pname{font-weight:600;font-size:16px;display:flex;align-items:center;gap:8px;flex-wrap:wrap;word-break:break-word}
+.pname{font-weight:600;font-size:14px;display:flex;align-items:center;gap:8px;flex-wrap:wrap;word-break:break-word}
 .pn-text{
   background:linear-gradient(110deg,#dfe9f7 0%,#dfe9f7 38%,#ffffff 50%,#dfe9f7 62%,#dfe9f7 100%);
   background-size:230% 100%;
   -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent;
   filter:drop-shadow(0 0 7px rgba(var(--glow-rgb),.42));
-  animation:nameShine 5.5s linear infinite;
+  animation:nameShine 6s linear infinite;
+  will-change:background-position;
 }
 @keyframes nameShine{0%{background-position:130% 0}100%{background-position:-30% 0}}
 .region{font-size:10px;font-weight:700;letter-spacing:.5px;padding:2px 6px;border-radius:5px;background:var(--panel-2);border:1px solid var(--line);color:var(--text-dim);flex:0 0 auto}
@@ -327,16 +373,16 @@ main{max-width:1200px;margin:0 auto;padding:26px 20px 60px}
 .ptitle .pts{color:var(--text-faint);font-size:12.5px}
 
 .pright{display:flex;flex-direction:column;align-items:flex-end;gap:6px;min-width:0}
-.points{font-family:'Chakra Petch',sans-serif;font-weight:700;font-size:16px;line-height:1}
+.points{font-family:'Chakra Petch',sans-serif;font-weight:700;font-size:14px;line-height:1}
 .points small{font-size:10px;color:var(--text-faint);font-weight:500}
 
 /* badges column (sits between the player name and the tiers) */
-.badges{display:flex;flex-direction:column;gap:5px;align-items:center;justify-content:center}
+.badges{display:flex;flex-direction:column;gap:5px;align-items:center;justify-content:center;contain:layout style paint}
 .badge{position:relative;overflow:hidden;display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:700;line-height:1;padding:5px 11px;border-radius:999px;white-space:nowrap;border:none;color:#0a0e14}
 .badge>span,.badge>svg,.badge .acc-ic{position:relative;z-index:2}
 .badge .acc-ic{width:14px;height:14px;flex:0 0 auto}
 .badge svg{width:13px;height:13px;flex:0 0 auto}
-.badge::after{content:"";position:absolute;inset:0;z-index:1;pointer-events:none;background:linear-gradient(110deg,transparent 38%,rgba(255,255,255,.5) 50%,transparent 62%);transform:translateX(-130%);animation:badgeShine 5s ease-in-out infinite}
+.badge::after{content:"";position:absolute;inset:0;z-index:1;pointer-events:none;background:linear-gradient(110deg,transparent 38%,rgba(255,255,255,.5) 50%,transparent 62%);transform:translateX(-130%);animation:badgeShine 6s ease-in-out infinite;will-change:transform}
 @keyframes badgeShine{0%,55%{transform:translateX(-130%)}100%{transform:translateX(130%)}}
 .badge.title{background:linear-gradient(135deg,color-mix(in srgb,var(--bc) 70%,#ffffff),var(--bc) 52%,color-mix(in srgb,var(--bc) 76%,#000000));box-shadow:0 0 13px color-mix(in srgb,var(--bc) 55%,transparent)}
 .badge.premium{background:linear-gradient(135deg,#cfe2ff,var(--accent) 52%,#5f86c8);box-shadow:0 0 13px rgba(var(--glow-rgb),.5)}
@@ -349,9 +395,9 @@ main{max-width:1200px;margin:0 auto;padding:26px 20px 60px}
 .badge.house-green{background:linear-gradient(135deg,#8fe6ad,#54c66b 52%,#2c8645);box-shadow:0 0 13px rgba(84,198,107,.48)}
 
 /* stacked tier tiles: gamemode orb on top, coloured tier rectangle below (mctiers style) */
-.gm-strip{display:flex;gap:7px;flex-wrap:nowrap;justify-content:flex-start;max-width:100%;overflow-x:auto;scrollbar-width:none}
+.gm-strip{display:flex;gap:7px;flex-wrap:nowrap;justify-content:flex-start;max-width:100%;overflow-x:auto;scrollbar-width:none;contain:layout style}
 .gm-strip::-webkit-scrollbar{display:none}
-.gm-tile{display:flex;flex-direction:column;align-items:center;gap:5px;width:46px;flex:0 0 auto}
+.gm-tile{display:flex;flex-direction:column;align-items:center;gap:5px;width:46px;flex:0 0 auto;contain:layout style paint}
 .gm-orb{
   width:42px;height:42px;border-radius:50%;display:grid;place-items:center;
   background:radial-gradient(circle at 50% 32%, #1d2c44, #0d1524);
@@ -395,10 +441,10 @@ main{max-width:1200px;margin:0 auto;padding:26px 20px 60px}
 .tb.t5.ht{background:var(--t5)}  .tb.t5.lt{color:var(--t5);border:1px solid var(--t5)}
 
 /* ---------- Gamemode columns ---------- */
-.cols{display:grid;grid-auto-flow:column;grid-auto-columns:minmax(152px,1fr);gap:12px;overflow-x:auto;padding-bottom:14px;scrollbar-width:thin}
+.cols{display:grid;grid-auto-flow:column;grid-auto-columns:minmax(152px,1fr);gap:12px;overflow-x:auto;padding-bottom:14px;scrollbar-width:thin;contain:layout style}
 .cols::-webkit-scrollbar{height:8px}
 .cols::-webkit-scrollbar-thumb{background:var(--line);border-radius:8px}
-.col{background:linear-gradient(180deg,var(--panel),var(--bg-2));border:1px solid var(--line-soft);border-radius:13px;overflow:hidden;display:flex;flex-direction:column;min-height:120px;animation:rise .5s both}
+.col{background:linear-gradient(180deg,var(--panel),var(--bg-2));border:1px solid var(--line-soft);border-radius:13px;overflow:hidden;display:flex;flex-direction:column;min-height:120px;animation:rise .5s both;content-visibility:auto;contain:layout style paint}
 .col-head{text-align:center;padding:11px 8px;font-family:'Chakra Petch',sans-serif;font-weight:700;font-size:15px;letter-spacing:.5px;border-bottom:1px solid var(--line-soft);position:relative}
 .col-head::before{content:"";position:absolute;left:0;right:0;top:0;height:3px}
 .col-head .ct{font-size:10px;display:block;color:var(--text-faint);font-weight:600;letter-spacing:1px;margin-top:1px}
@@ -407,8 +453,8 @@ main{max-width:1200px;margin:0 auto;padding:26px 20px 60px}
 .col.t3 .col-head{color:var(--t3)} .col.t3 .col-head::before{background:var(--t3)}
 .col.t4 .col-head{color:var(--t4)} .col.t4 .col-head::before{background:var(--t4)}
 .col.t5 .col-head{color:var(--t5)} .col.t5 .col-head::before{background:var(--t5)}
-.col-body{padding:8px;display:flex;flex-direction:column;gap:6px;flex:1}
-.entry{display:flex;align-items:center;gap:9px;padding:6px;border-radius:9px;background:var(--bg-2);border:1px solid transparent;cursor:pointer;transition:.14s}
+.col-body{padding:8px;display:flex;flex-direction:column;gap:6px;flex:1;contain:layout style paint}
+.entry{display:flex;align-items:center;gap:9px;padding:6px;border-radius:9px;background:var(--bg-2);border:1px solid transparent;cursor:pointer;transition:.14s;contain:layout style paint}
 .entry:hover{border-color:var(--line);background:var(--panel-2)}
 .entry .avatar{width:30px;height:30px;border-radius:6px}
 .entry .en{font-size:13px;font-weight:500;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
@@ -416,15 +462,33 @@ main{max-width:1200px;margin:0 auto;padding:26px 20px 60px}
 .col-empty{color:var(--text-faint);font-size:12px;text-align:center;padding:18px 8px;font-style:italic}
 
 /* ---------- Modal ---------- */
-.modal-bg{position:fixed;inset:0;z-index:100;background:rgba(4,7,12,.74);backdrop-filter:blur(6px);display:none;align-items:center;justify-content:center;padding:20px}
+.modal-bg{position:fixed;inset:0;z-index:100;background:rgba(4,7,12,.74);backdrop-filter:blur(4px);display:none;align-items:center;justify-content:center;padding:20px}
 .modal-bg.open{display:flex;animation:fade .2s}
 @keyframes fade{from{opacity:0}to{opacity:1}}
-.modal{background:linear-gradient(180deg,var(--panel),var(--bg-2));border:1px solid var(--line);border-radius:18px;max-width:620px;width:100%;max-height:88vh;overflow-y:auto;animation:pop .22s;box-shadow:0 30px 80px rgba(0,0,0,.6);scrollbar-width:thin;scrollbar-color:#243650 transparent}
+.modal{background:linear-gradient(180deg,var(--panel),var(--bg-2));border:1px solid var(--line);border-radius:18px;max-width:620px;width:100%;max-height:88vh;overflow-y:auto;animation:pop .22s;box-shadow:0 30px 80px rgba(0,0,0,.6);scrollbar-width:thin;scrollbar-color:#243650 transparent;contain:layout style paint}
 .modal::-webkit-scrollbar{width:11px}
 .modal::-webkit-scrollbar-track{background:transparent}
 .modal::-webkit-scrollbar-thumb{background:#243650;border-radius:10px;border:3px solid transparent;background-clip:padding-box}
 .modal::-webkit-scrollbar-thumb:hover{background:#2e425e}
 @keyframes pop{from{opacity:0;transform:scale(.95) translateY(10px)}to{opacity:1;transform:none}}
+
+/* Desktop Modal Compactness */
+@media(min-width: 851px) {
+  .modal { max-width: 520px; }
+  .profile-head { padding: 18px 22px 14px; gap: 18px; }
+  .profile-skin { width: 84px; min-height: 160px; }
+  .profile-skin img { height: 160px; }
+  .profile-name { font-size: 24px; margin-bottom: 10px; }
+  .profile-badges { margin-bottom: 12px; gap: 6px; }
+  .profile-stats { gap: 8px; }
+  .pstat-pts b { font-size: 22px; }
+  .modal-body { padding: 14px 22px 22px; }
+  .modal-body h4 { margin-bottom: 10px; font-size: 11px; }
+  .tier-cards { grid-template-columns: repeat(auto-fill, minmax(88px, 1fr)); gap: 8px; }
+  .tcard { padding: 12px 6px 10px; }
+  .tcard-name { font-size: 11px; }
+}
+
 .modal-head{position:relative;padding:26px 24px 20px;display:flex;gap:16px;align-items:center;border-bottom:1px solid var(--line-soft);background:radial-gradient(420px 130px at 18% 0%,rgba(var(--glow-rgb),.1),transparent)}
 .modal-head .avatar{width:66px;height:66px;border-radius:12px}
 .modal-head .mh-info h3{font-family:'Chakra Petch';font-size:23px;font-weight:700;word-break:break-word}
@@ -433,7 +497,7 @@ main{max-width:1200px;margin:0 auto;padding:26px 20px 60px}
 .modal-head .mh-info .mmeta{font-size:13px;color:var(--text-dim);margin-top:7px;display:flex;gap:14px;flex-wrap:wrap}
 .modal-head .mh-info .mmeta b{color:var(--text);font-family:'Chakra Petch'}
 .modal-body .acc-ic{width:22px;height:22px;flex-shrink:0}
-.close-x{position:absolute;top:14px;right:14px;width:32px;height:32px;border-radius:8px;display:grid;place-items:center;background:var(--panel-2);border:1px solid var(--line);font-size:18px;color:var(--text-dim);transition:.15s}
+.close-x{position:fixed;top:32px;right:32px;width:32px;height:32px;border-radius:8px;display:grid;place-items:center;background:var(--panel-2);border:1px solid var(--line);font-size:18px;color:var(--text-dim);transition:.15s;z-index:101;cursor:pointer}
 .close-x:hover{color:var(--text);border-color:var(--accent)}
 .modal-body{padding:18px 24px 26px}
 .modal-body h4{font-size:12px;letter-spacing:1.5px;text-transform:uppercase;color:var(--text-faint);margin-bottom:12px}
@@ -602,6 +666,12 @@ let GAMEMODES, PLAYERS, POINTS, TITLES, GM, SUBGAMEMODES=[], SUBGM={};
 /* ============================================================================
    ███  ENGINE — no need to edit below  ███
    ============================================================================ */
+const $ = id => document.getElementById(id);
+const elContent = $("content");
+const elTabs = $("tabs");
+const elModal = $("modal");
+const elModalBg = $("modalBg");
+
 const TIER_ORDER = ["HT1","LT1","HT2","LT2","HT3","LT3","HT4","LT4","HT5","LT5"];
 
 /* a tier placement can be a string "HT3" OR an object {tier:"HT3",retired:true,peak:true} */
@@ -672,7 +742,7 @@ function accoladeIcon(t){
 function avatar(name, cls=""){
   const init=(name.replace(/[^a-zA-Z0-9]/g,"")[0]||"?").toUpperCase();
   return `<div class="avatar ${cls}">
-    <img src="https://minotar.net/helm/${encodeURIComponent(name)}/96" loading="lazy"
+    <img src="https://minotar.net/helm/${encodeURIComponent(name)}/96" alt="${name}" loading="lazy" decoding="async"
          onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
     <span class="avatar-fallback">${init}</span></div>`;
 }
@@ -684,7 +754,7 @@ const isFullyRetired = p => {const v=Object.values(p.tiers); return v.length>0 &
 /* region filter (auto-hides if no regions present) */
 function buildRegionFilter(){
   const regions=[...new Set(PLAYERS.map(p=>p.region).filter(Boolean))].sort();
-  const sel=document.getElementById("regionFilter");
+  const sel=$("regionFilter");
   if(!regions.length){ sel.style.display="none"; return; }
   regions.forEach(r=>{const o=document.createElement("option");o.value=r;o.textContent=r;sel.appendChild(o);});
 }
@@ -703,29 +773,48 @@ function buildTabs(){
     html+=`<button class="tab tab-switch" data-switch="1"><span class="ic">${SWITCH_SVG}</span><span class="lb">${swText}</span></button>`;
   }
   html += `<div class="tab-indicator"></div>`;
-  tabs.innerHTML=html;
+  elTabs.innerHTML=html;
 
-  const activeBtn = tabs.querySelector(".tab.active");
-  const indicator = tabs.querySelector(".tab-indicator");
-  if (activeBtn && indicator) {
-    indicator.style.left = activeBtn.offsetLeft + "px";
-    indicator.style.width = activeBtn.offsetWidth + "px";
-  }
+  // Position the indicator initially
+  updateTabIndicator();
 
-  tabs.querySelectorAll(".tab").forEach(b=>b.onclick=()=>{
+  elTabs.querySelectorAll(".tab").forEach(b=>b.onclick=()=>{
     if(b.dataset.switch){ toggleTabMode(); return; }
+    if(activeTab === b.dataset.tab) return;
+
     const updateUI = () => {
       activeTab = b.dataset.tab;
       visibleCount = 60;
       buildTabs();
       render();
     };
+
     if (document.startViewTransition) {
-      document.startViewTransition(updateUI);
+      const tabsArr = Array.from(elTabs.querySelectorAll(".tab[data-tab]"));
+      const currentIdx = tabsArr.findIndex(t => t.dataset.tab === activeTab);
+      const nextIdx = tabsArr.findIndex(t => t.dataset.tab === b.dataset.tab);
+      const direction = nextIdx > currentIdx ? 'right' : 'left';
+
+      document.documentElement.classList.add(`tab-slide-${direction}`);
+      const transition = document.startViewTransition(updateUI);
+      transition.finished.finally(() => {
+        document.documentElement.classList.remove('tab-slide-left', 'tab-slide-right');
+      });
     } else {
       updateUI();
     }
   });
+}
+
+function updateTabIndicator() {
+  const activeBtn = elTabs.querySelector(".tab.active");
+  const indicator = elTabs.querySelector(".tab-indicator");
+  if (activeBtn && indicator) {
+    requestAnimationFrame(() => {
+      indicator.style.left = activeBtn.offsetLeft + "px";
+      indicator.style.width = activeBtn.offsetWidth + "px";
+    });
+  }
 }
 
 function toggleTabMode(){
@@ -752,7 +841,7 @@ function toggleTabMode(){
 
 function matchPlayer(p){
   if(region && p.region!==region) return false;
-  if(query && !p.name.toLowerCase().includes(query)) return false;
+  if(query && !p.searchName.includes(query)) return false;
   if(premiumOnly && !p.premium) return false;
   if(testerOnly && !(p.tester||p.subtester)) return false;
   if(houseFilter!=="off"){
@@ -763,12 +852,12 @@ function matchPlayer(p){
 }
 
 function renderOverall(){
-  const allRanked = PLAYERS.map(p=>({p,total:playerTotal(p)}))
-    .sort((a,b)=>b.total-a.total||a.p.name.localeCompare(b.p.name))
-    .map((x,i)=>({...x,rank:i+1})).filter(x=>matchPlayer(x.p) && !(hideRetired && isFullyRetired(x.p)));
+  // Use the pre-calculated rank and total from the pre-sorted PLAYERS array
+  const allRanked = PLAYERS.map((p, i) => ({p, total: p.computedTotal, rank: i + 1}))
+                           .filter(x => matchPlayer(x.p) && !(hideRetired && isFullyRetired(x.p)));
 
   const ranked = allRanked.slice(0, visibleCount);
-  const tp=PLAYERS.length, modes=GAMEMODES.length;
+  const tp=PLAYERS.length;
   const tested=PLAYERS.reduce((s,p)=>s+Object.keys(p.tiers).length,0);
 
   let html=`<div class="view-title"><h2>Overall Rankings</h2><span class="sub">Aggregate skill across all gamemodes</span></div>
@@ -777,7 +866,7 @@ function renderOverall(){
     <div class="stat"><span class="n">${tested}</span><span class="l">Tier Placements</span></div>
   </div>`;
 
-  if(!allRanked.length){document.getElementById("content").innerHTML=html+`<div class="empty-state">No players match your search.</div>`;return;}
+  if(!allRanked.length){elContent.innerHTML=html+`<div class="empty-state">No players match your search.</div>`;return;}
 
   html+=`<div class="board">
   <div class="board-head">
@@ -787,10 +876,12 @@ function renderOverall(){
     <div class="bh-badges">Tester &amp; Badges <button class="bh-info" type="button" onclick="openInfo('titles')" title="What these badges mean">i</button></div>
     <div class="bh-tiers">Tiers</div>
   </div>`;
-  ranked.forEach((x,idx)=>{
+  
+  // Build rows with lazy rendering for better performance
+  const rowsHtml = ranked.map((x,idx)=>{
     const p=x.p,t=titleFor(x.total),topCls=x.rank<=3?` top${x.rank}`:(p.premium?" premium":"");
     const chips=GAMEMODES.map(g=>p.tiers[g.id]?gmTile(g,p.tiers[g.id]):gmPlaceholder(g)).join("");
-    html+=`<div class="row${topCls}" style="animation-delay:${idx*18}ms" data-player="${encodeURIComponent(p.name)}">
+    return `<div class="row${topCls}" style="animation-delay:${idx*18}ms" data-player="${encodeURIComponent(p.name)}">
       <div class="rank">${x.rank}${x.rank<=3?'<small>RANK</small>':''}</div>
       ${avatar(p.name)}
       <div class="pinfo">
@@ -802,8 +893,9 @@ function renderOverall(){
         <div class="gm-strip">${chips}</div>
       </div>
     </div>`;
-  });
-  html+=`</div>`;
+  }).join("");
+  
+  html+=rowsHtml+`</div>`;
 
   if (allRanked.length > visibleCount) {
     html += `<div style="text-align:center;padding:30px 0;">
@@ -813,27 +905,44 @@ function renderOverall(){
     </div>`;
   }
 
-  document.getElementById("content").innerHTML=html;
+  elContent.innerHTML=html;
 }
 
 function renderGamemode(gid){
   const sub = tabMode==="sub";
   const g = sub ? SUBGM[gid] : GM[gid];
-  if(!g){ document.getElementById("content").innerHTML=""; return; }
+  if(!g){ elContent.innerHTML=""; return; }
+  
   const byTier=Object.fromEntries(TIER_ORDER.map(t=>[t,[]]));
-  PLAYERS.forEach(p=>{const obj=sub?(p.subtiers||{}):p.tiers; const v=obj[gid]; if(!v||!matchPlayer(p))return; const info=tierInfo(v); if(hideRetired&&info.retired)return; if(byTier[info.tier]) byTier[info.tier].push({p,info});});
+  PLAYERS.forEach(p=>{
+    const obj=sub?(p.subtiers||{}):p.tiers; 
+    const v=obj[gid]; 
+    if(!v||!matchPlayer(p))return; 
+    const info=tierInfo(v); 
+    if(hideRetired&&info.retired)return; 
+    if(byTier[info.tier]) byTier[info.tier].push({p,info});
+  });
+  
   Object.values(byTier).forEach(a=>a.sort((x,y)=>x.p.name.localeCompare(y.p.name)));
   const total=Object.values(byTier).reduce((s,a)=>s+a.length,0);
 
   let html=`<div class="view-title"><h2>${g.icon||""} ${g.name}</h2><span class="sub">${sub?"Subtier list":"Tier list"}</span></div>
   <div class="view-meta">${total} player${total!==1?"s":""} tested in ${g.name}${sub?" (subtier — no points)":""}</div><div class="cols">`;
-  TIER_ORDER.forEach((t,i)=>{
+  
+  // Build columns efficiently
+  const colsHtml = TIER_ORDER.map((t,i)=>{
     const d=tierDigit(t),list=byTier[t];
-    const body=list.length?list.map(it=>{const p=it.p,info=it.info;const sub2=`${info.tier} · ${tierPoints(info.tier)} points`;const rc=(info.retired||info.peak)?" entry-retired":"";return `<div class="entry${rc}" data-player="${encodeURIComponent(p.name)}" data-tip-title="${tierState(info)}" data-tip-sub="${sub2}">${avatar(p.name)}<span class="en">${p.name}</span>${p.region?`<span class="region er">${p.region}</span>`:""}</div>`;}).join(""):`<div class="col-empty">—</div>`;
-    html+=`<div class="col t${d}" style="animation-delay:${i*28}ms"><div class="col-head">${t}<span class="ct">${tierPoints(t)} PTS</span></div><div class="col-body">${body}</div></div>`;
-  });
-  html+=`</div>`;
-  document.getElementById("content").innerHTML=html;
+    const body=list.length?list.map(it=>{
+      const p=it.p,info=it.info;
+      const sub2=`${info.tier} · ${tierPoints(info.tier)} points`;
+      const rc=(info.retired||info.peak)?" entry-retired":"";
+      return `<div class="entry${rc}" data-player="${encodeURIComponent(p.name)}" data-tip-title="${tierState(info)}" data-tip-sub="${sub2}">${avatar(p.name)}<span class="en">${p.name}</span>${p.region?`<span class="region er">${p.region}</span>`:""}</div>`;
+    }).join(""):`<div class="col-empty">—</div>`;
+    return `<div class="col t${d}" style="animation-delay:${i*28}ms"><div class="col-head">${t}<span class="ct">${tierPoints(t)} PTS</span></div><div class="col-body">${body}</div></div>`;
+  }).join("");
+  
+  html+=colsHtml+`</div>`;
+  elContent.innerHTML=html;
 }
 
 function openInfo(tab) {
@@ -1052,13 +1161,13 @@ function openInfo(tab) {
     }
   }
 
-  document.getElementById("modal").innerHTML=`<button class="close-x" onclick="closeModal()">✕</button>
+  elModal.innerHTML=`<button class="close-x" onclick="closeModal()">✕</button>
     <div class="modal-head" style="flex-direction:column;align-items:flex-start;gap:0;padding-bottom:0">
       <div class="mh-info"><h3 style="font-size:20px">Information</h3></div>
       ${tabsHtml}
     </div>
     <div class="modal-body">${bodyHtml}</div>`;
-  document.getElementById("modalBg").classList.add("open");
+  elModalBg.classList.add("open");
 }
 
 /* badge pills for the profile: same three-slot system, each with a hover explanation */
@@ -1075,18 +1184,18 @@ function profileEmptyCard(g){
 function openPlayer(name){
   const p=PLAYERS.find(x=>x.name===name);if(!p)return;
   const total=playerTotal(p),t=titleFor(total);
-  const rank=PLAYERS.map(x=>({n:x.name,tot:playerTotal(x)})).sort((a,b)=>b.tot-a.tot).findIndex(x=>x.n===name)+1;
+  const rank = PLAYERS.findIndex(x => x.name === name) + 1;
   const cards=GAMEMODES.map(g=>p.tiers[g.id]?profileTierCard(g,p.tiers[g.id]):profileEmptyCard(g)).join("");
   const subObj=p.subtiers||{};
   const subCards=SUBGAMEMODES.map(g=>subObj[g.id]?profileTierCard(g,subObj[g.id]):profileEmptyCard(g)).join("");
   const subSection=SUBGAMEMODES.length?`<h4 style="margin-top:24px">Subtier Kits</h4><div class="tier-cards">${subCards}</div>`:"";
   const skin=`https://minotar.net/armor/body/${encodeURIComponent(name)}/100.png`;
   const init=(name.replace(/[^a-zA-Z0-9]/g,"")[0]||"?").toUpperCase();
-  document.getElementById("modal").innerHTML=`
-    <button class="close-x" onclick="closeModal()">✕</button>
+  elModal.innerHTML=`
+    <button class="close-x" onclick="closeModal()" aria-label="Close profile modal">✕</button>
     <div class="profile-head">
       <div class="profile-skin">
-        <img src="${skin}" alt="${name}" onerror="this.style.display='none';this.nextElementSibling.style.display='grid'">
+        <img src="${skin}" alt="${name}" loading="lazy" decoding="async" onerror="this.style.display='none';this.nextElementSibling.style.display='grid'">
         <span class="skin-fallback">${init}</span>
       </div>
       <div class="profile-info">
@@ -1100,13 +1209,13 @@ function openPlayer(name){
       </div>
     </div>
     <div class="modal-body"><h4>Kit Tiers</h4><div class="tier-cards">${cards}</div>${subSection}</div>`;
-  document.getElementById("modalBg").classList.add("open");
+  elModalBg.classList.add("open");
 }
-function closeModal(){document.getElementById("modalBg").classList.remove("open");}
-document.getElementById("modalBg").onclick=e=>{if(e.target.id==="modalBg")closeModal();};
+function closeModal(){elModalBg.classList.remove("open");}
+elModalBg.onclick=e=>{if(e.target.id==="modalBg")closeModal();};
 document.addEventListener("keydown",e=>{if(e.key==="Escape")closeModal();});
-document.getElementById("infoBtn").onclick = openInfo;
-document.getElementById("content").addEventListener("click", e => {
+$("infoBtn").onclick = openInfo;
+elContent.addEventListener("click", e => {
   const el = e.target.closest("[data-player]");
   if (el) openPlayer(decodeURIComponent(el.dataset.player));
 });
@@ -1130,9 +1239,23 @@ function render(){
     if (overlay) overlay.innerHTML = '';
   }
   (tabMode==="main" && activeTab==="overall") ? renderOverall() : renderGamemode(activeTab);
+  updateTabIndicator();
 }
-document.getElementById("search").oninput=e=>{query=e.target.value.trim().toLowerCase();visibleCount=60;render();};
-document.getElementById("regionFilter").onchange=e=>{region=e.target.value;visibleCount=60;render();};
+
+// Debounce search to prevent UI freezing on long lists
+let searchTimer;
+$("search").oninput=e=>{
+  const val = e.target.value.trim().toLowerCase();
+  clearTimeout(searchTimer);
+  searchTimer = setTimeout(() => {
+    if (query === val) return;
+    query = val;
+    visibleCount = 60;
+    if (activeTab !== "overall") activeTab = "overall"; 
+    render();
+  }, 150);
+};
+$("regionFilter").onchange=e=>{region=e.target.value;visibleCount=60;render();};
 
 /* ---- filter toggles (Hide Retired / Premium only) ---- */
 const retiredChip=document.getElementById("filterRetired");
@@ -1176,8 +1299,9 @@ document.addEventListener("mouseover",e=>{const el=e.target.closest("[data-tip-t
 document.addEventListener("mouseout",e=>{const el=e.target.closest("[data-tip-title]");if(el&&!el.contains(e.relatedTarget))hideTip();});
 window.addEventListener("scroll",hideTip,{passive:true});
 
-/* Handle tab bar fade on scroll (Overall view only) */
+/* Handle tab bar fade on scroll (Overall view only) - Optimized */
 let lastScrollY = window.scrollY;
+let scrollTimeout = null;
 window.addEventListener("scroll", () => {
   const bar = document.querySelector(".tabs-bar");
   if (!bar) return;
@@ -1190,31 +1314,40 @@ window.addEventListener("scroll", () => {
     bar.classList.remove("is-hidden");
   }
   lastScrollY = currentScrollY;
-}, { passive: true });
+}, { passive: true, capture: false });
 
 window.addEventListener("resize", buildTabs);
 
 /* ---- load data.json, then build the UI ---- */
+let cachedData = null;
 async function init(){
-  const content=document.getElementById("content");
-  content.innerHTML='<div class="empty-state">Loading rankings…</div>';
+  elContent.innerHTML='<div class="empty-state">Loading rankings…</div>';
   try{
-    const res=await fetch("./data.json?t="+Date.now(),{cache:"no-store"});
+    // Disabled localStorage cache to ensure edits to data.json are immediate during development
+    const res = await fetch("./data.json?t=" + Date.now(), {cache:"no-store"});
     if(!res.ok) throw new Error("HTTP "+res.status);
     const DATA=await res.json();
-    GAMEMODES=DATA.gamemodes; PLAYERS=DATA.players; POINTS=DATA.points; TITLES=DATA.titles;
-    PLAYERS.forEach(p => p.computedTotal = playerTotal(p));
-    SUBGAMEMODES=DATA.subgamemodes||[];
-    GM=Object.fromEntries(GAMEMODES.map(g=>[g.id,g]));
-    SUBGM=Object.fromEntries(SUBGAMEMODES.map(g=>[g.id,g]));
-    buildRegionFilter(); buildTabs(); render();
+    initData(DATA);
   }catch(e){
-    content.innerHTML=`<div class="empty-state">Couldn't load tier data (${e.message}).<br>Make sure <b>data.json</b> is in the same folder as index.html.</div>`;
+    elContent.innerHTML=`<div class="empty-state">Couldn't load tier data (${e.message}).<br>Make sure <b>data.json</b> is in the same folder as index.html.</div>`;
   }
+}
+function initData(DATA) {
+  GAMEMODES=DATA.gamemodes; PLAYERS=DATA.players; POINTS=DATA.points; TITLES=DATA.titles;
+  PLAYERS.forEach(p => {
+    p.computedTotal = playerTotal(p);
+    p.searchName = (p.name || "").toLowerCase();
+  });
+  // Pre-sort players by points once to avoid expensive sorting on every render
+  PLAYERS.sort((a,b)=>b.computedTotal-a.computedTotal||a.name.localeCompare(b.name));
+  SUBGAMEMODES=DATA.subgamemodes||[];
+  GM=Object.fromEntries(GAMEMODES.map(g=>[g.id,g]));
+  SUBGM=Object.fromEntries(SUBGAMEMODES.map(g=>[g.id,g]));
+  buildRegionFilter(); buildTabs(); render();
 }
 init();
 
-/* Cycle Header Backgrounds */
+/* Optimized Background Cycling - Reduced layers and better caching */
 function cycleBackgrounds() {
   const backgrounds = [
     "Images/Backgrounds/Top Background/Top Background 1.png",
@@ -1223,38 +1356,25 @@ function cycleBackgrounds() {
   ];
   
   const headerEl = document.querySelector('header');
-  
-  // Create two layers for a seamless cross-fade
-  const layer1 = document.createElement('div');
-  const layer2 = document.createElement('div');
-  [layer1, layer2].forEach(l => {
-    l.style.cssText = "position:absolute;inset:0;z-index:-1;background:center/cover no-repeat;transition:opacity 1.5s ease-in-out;";
-  });
-  
-  layer1.style.backgroundImage = `url("${backgrounds[0]}")`;
-  layer2.style.opacity = '0';
-  
-  headerEl.prepend(layer2);553989
-  headerEl.prepend(layer1);
-
   let currentIndex = 0;
-  let activeLayer = layer1;
-  let idleLayer = layer2;
-
-  // Preload images to ensure smooth transitions
-  backgrounds.forEach(src => { const img = new Image(); img.src = src; });
+  const cachedLayers = [];
   
-  setInterval(() => {
-    currentIndex = (currentIndex + 1) % backgrounds.length;
-    idleLayer.style.backgroundImage = `url("${backgrounds[currentIndex]}")`;
-    
-    // Cross-fade: Bring idle layer to front, fade active layer out
-    setTimeout(() => {
-      idleLayer.style.opacity = '1';
-      activeLayer.style.opacity = '0';
-      [activeLayer, idleLayer] = [idleLayer, activeLayer];
-    }, 50);
-  }, 8000);
+  function showNext(index) {
+    let layer = cachedLayers[index];
+    if (!layer) {
+      layer = document.createElement('div');
+      layer.style.cssText = "position:absolute;inset:0;z-index:-1;background:center/cover no-repeat;opacity:0;transition:opacity 1.2s ease-in-out;";
+      layer.style.backgroundImage = `url("${backgrounds[index]}")`;
+      cachedLayers[index] = layer;
+      headerEl.prepend(layer);
+    }
+    void layer.offsetHeight;
+    layer.style.opacity = '1';
+    cachedLayers.forEach((l, i) => { if (i !== index) l.style.opacity = '0'; });
+  }
+
+  showNext(0);
+  setInterval(() => { currentIndex = (currentIndex + 1) % backgrounds.length; showNext(currentIndex); }, 8000);
 }
 cycleBackgrounds();
 </script>
