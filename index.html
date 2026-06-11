@@ -250,18 +250,18 @@ select:focus{border-color:var(--accent)}
    display: none;
  }
 
- /* During a mode switch the whole panel slides in as one unit via the view
-    transition, so suppress the per-element `rise` entrance stagger. Returning to
-    Maintiers lands on the Overall view (up to 60 heavy rows); running 60 staggered
-    row animations on the live DOM while the compositor drives the slide was what
-    made the back-transition janky. The forward switch lands on the near-empty first
-    subtier, so it never paid that cost. Killing the stagger here makes both
-    directions composite the same way. The class is removed once the transition
-    finishes, by which point elements are already at their final state — no re-trigger,
-    no jump. */
- html.switching-modes #content .row,
- html.switching-modes #content .col {
-   animation: none !important;
+ /* Clip the content snapshot to the viewport during a mode switch.
+    Returning to Maintiers renders the full Overall list, so #content (which owns
+    the `tab-content` view-transition-name) becomes thousands of pixels tall. The
+    View Transition then has to rasterize and animate that entire height as a single
+    texture, which is what made the back-transition stutter — the forward switch
+    lands on a short Subtier panel and never pays that cost. Clipping to the viewport
+    makes both directions animate a similarly sized texture. The rows past the fold
+    are off-screen anyway, so nothing visibly changes when the clip is lifted once
+    the transition finishes — no flicker, no re-triggered animations. */
+ html.switching-modes #content {
+   max-height: 100vh;
+   overflow: clip;
  }
 
 .sub-mode .tabs-bar {
