@@ -195,7 +195,7 @@
         "dsmp": "LT1",
         "nsmp": "LT1",
         "dpot": "HT2",
-        "npot": "HT2",
+        "npot": "LT1",
         "hsmp": "LT1"
       },
       "subtiers": {
