@@ -794,6 +794,13 @@
         "axe": "LT2",
         "crystal": "HT1"
       }
+    },
+    {
+      "name": "keeperh",
+      "region": "",
+      "tiers": {
+        "sword": "LT1"
+      }
     }
   ]
 }
