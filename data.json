@@ -298,7 +298,7 @@
       "developer": true,
       "subtester": "pearl",
       "tiers": {
-        "sword": "HT2",
+        "sword": "HT1",
         "axe": "HT3",
         "uhc": "HT3",
         "mace": "LT3",
