@@ -668,7 +668,8 @@
       "uuid": "4faa36a4-e993-4cbd-a2ff-e88b11435d7f",
       "region": "",
       "tiers": {
-        "hsmp": "LT1"
+        "hsmp": "LT1",
+        "sword": "LT1"
       }
     },
     {
