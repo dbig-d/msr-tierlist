@@ -811,7 +811,8 @@
         "axe": "LT1",
         "crystal": "LT1",
         "uhc": "LT2",
-        "dsmp": "HT2"
+        "dsmp": "HT2",
+        "nsmp": "LT1"
       }
     }
   ]
