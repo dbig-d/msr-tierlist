@@ -807,7 +807,8 @@
       "name": "bomb360",
       "region": "",
       "tiers": {
-        "sword": "LT1"
+        "sword": "LT1",
+        "axe": "LT1"
       }
     }
   ]
