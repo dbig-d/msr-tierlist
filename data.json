@@ -812,7 +812,8 @@
         "crystal": "LT1",
         "uhc": "LT2",
         "dsmp": "HT2",
-        "nsmp": "LT1"
+        "nsmp": "LT1",
+        "dpot": "HT3"
       }
     }
   ]
