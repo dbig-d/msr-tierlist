@@ -808,7 +808,8 @@
       "region": "",
       "tiers": {
         "sword": "LT1",
-        "axe": "LT1"
+        "axe": "LT1",
+        "crystal": "LT1"
       }
     }
   ]
