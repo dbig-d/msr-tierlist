@@ -804,6 +804,13 @@
         "sword": "LT1",
         "axe": "LT1"
       }
+    },
+    {
+      "name": "EddyTheTeddy",
+      "region": "",
+      "tiers": {
+        "dsmp": "LT5"
+      }
     }
   ]
 }
