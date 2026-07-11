@@ -809,7 +809,8 @@
       "tiers": {
         "sword": "LT1",
         "axe": "LT1",
-        "crystal": "LT1"
+        "crystal": "LT1",
+        "uhc": "LT2"
       }
     }
   ]
