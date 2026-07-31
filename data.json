@@ -809,7 +809,8 @@
         "uhc": "HT1"
       },
       "house": "blue",
-      "tester": true
+      "tester": true,
+      "premium": true
     }
   ]
 }
