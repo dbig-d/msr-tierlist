@@ -140,9 +140,7 @@
       "premium": true,
       "tester": true,
       "house": "blue",
-      "tiers": {
-        "npot": "HT1"
-      }
+      "tiers": {}
     },
     {
       "name": "Brojules",
