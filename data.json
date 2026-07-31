@@ -818,7 +818,8 @@
         "nsmp": "HT1",
         "npot": "HT1",
         "hsmp": "HT1",
-        "mace": "HT2"
+        "mace": "HT2",
+        "crystal": "LT2"
       }
     }
   ]
