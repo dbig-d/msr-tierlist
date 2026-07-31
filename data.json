@@ -143,7 +143,6 @@
       "tiers": {
         "mace": "HT2",
         "crystal": "LT2",
-        "nsmp": "HT1",
         "dpot": "LT1",
         "npot": "HT1",
         "hsmp": "HT1"
