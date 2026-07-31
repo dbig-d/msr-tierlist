@@ -811,7 +811,8 @@
       "name": "cricketrulz",
       "region": "",
       "tiers": {
-        "sword": "LT1"
+        "sword": "LT1",
+        "axe": "LT1"
       }
     }
   ]
