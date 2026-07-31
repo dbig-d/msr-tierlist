@@ -141,7 +141,6 @@
       "tester": true,
       "house": "blue",
       "tiers": {
-        "sword": "LT1",
         "axe": "LT1",
         "uhc": "HT1",
         "mace": "HT2",
