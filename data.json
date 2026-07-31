@@ -141,7 +141,6 @@
       "tester": true,
       "house": "blue",
       "tiers": {
-        "axe": "LT1",
         "uhc": "HT1",
         "mace": "HT2",
         "crystal": "LT2",
