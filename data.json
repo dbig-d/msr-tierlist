@@ -816,7 +816,8 @@
         "dpot": "LT1",
         "dsmp": "HT1",
         "nsmp": "HT1",
-        "npot": "HT1"
+        "npot": "HT1",
+        "hsmp": "HT1"
       }
     }
   ]
