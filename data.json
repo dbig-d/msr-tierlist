@@ -808,7 +808,8 @@
         "crystal": "LT2",
         "uhc": "HT1"
       },
-      "house": "blue"
+      "house": "blue",
+      "tester": true
     }
   ]
 }
