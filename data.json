@@ -813,7 +813,8 @@
       "tiers": {
         "sword": "LT1",
         "axe": "LT1",
-        "dpot": "LT1"
+        "dpot": "LT1",
+        "dsmp": "HT1"
       }
     }
   ]
