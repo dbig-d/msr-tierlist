@@ -815,7 +815,8 @@
         "axe": "LT1",
         "dpot": "LT1",
         "dsmp": "HT1",
-        "nsmp": "HT1"
+        "nsmp": "HT1",
+        "npot": "HT1"
       }
     }
   ]
