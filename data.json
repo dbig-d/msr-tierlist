@@ -806,7 +806,7 @@
         "hsmp": "HT1",
         "mace": "HT2",
         "crystal": "LT2",
-        "uhc": "LT5"
+        "uhc": "HT1"
       }
     }
   ]
