@@ -141,7 +141,6 @@
       "tester": true,
       "house": "blue",
       "tiers": {
-        "mace": "HT2",
         "crystal": "LT2",
         "dpot": "LT1",
         "npot": "HT1"
