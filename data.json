@@ -817,7 +817,8 @@
         "dsmp": "HT1",
         "nsmp": "HT1",
         "npot": "HT1",
-        "hsmp": "HT1"
+        "hsmp": "HT1",
+        "mace": "HT2"
       }
     }
   ]
