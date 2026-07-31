@@ -805,7 +805,8 @@
         "npot": "HT1",
         "hsmp": "HT1",
         "mace": "HT2",
-        "crystal": "LT2"
+        "crystal": "LT2",
+        "uhc": "LT5"
       }
     }
   ]
