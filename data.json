@@ -164,10 +164,7 @@
         "sword": "LT1",
         "axe": "LT1",
         "uhc": "LT1",
-        "mace": {
-          "tier": "HT1",
-          "retired": true
-        },
+        "mace": "HT1",
         "crystal": {
           "tier": "HT1",
           "retired": true
