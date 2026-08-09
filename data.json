@@ -70,6 +70,11 @@
       "icon": "<img src='Images/Icons/Mace.png' style='height:1em; vertical-align:middle; transform:scale(1.5);'>"
     },
     {
+      "id": "spearmace",
+      "name": "Spear Mace",
+      "icon": "<img src='Images/Icons/Subtiers/Spear Mace.png' style='height:1em; vertical-align:middle; transform:scale(1.5);'>"
+    },
+    {
       "id": "crystal",
       "name": "Crystal",
       "icon": "<img src='Images/Icons/End Crystal.png' style='height:1em; vertical-align:middle; transform:scale(1.5);'>"
@@ -125,11 +130,6 @@
       "id": "spleef",
       "name": "Spleef",
       "icon": "<img src='Images/Icons/Subtiers/Diamond Shovel.png' style='height:1em; vertical-align:middle; transform:scale(1.5);'>"
-    },
-    {
-      "id": "spearmace",
-      "name": "Spear Mace",
-      "icon": "<img src='Images/Icons/Subtiers/Spear Mace.png' style='height:1em; vertical-align:middle; transform:scale(1.5);'>"
     }
   ],
   "players": [
@@ -185,6 +185,7 @@
           "tier": "HT1",
           "retired": true
         },
+        "spearmace": "HT3",
         "crystal": {
           "tier": "LT1",
           "retired": true
@@ -200,7 +201,6 @@
         "cart": "HT3",
         "creeper": "LT2",
         "spleef": "LT2",
-        "spearmace": "HT3",
         "fireball": "LT2"
       }
     },
