@@ -103,6 +103,11 @@
       "id": "hsmp",
       "name": "Hybrid SMP",
       "icon": "<img src='Images/Icons/Hybrid SMP.png' style='height:1em; vertical-align:middle; transform:scale(1.5);'>"
+    },
+    {
+      "id": "money",
+      "name": "Money SMP",
+      "icon": "<img src='Images/Icons/Money SMP.png' style='height:1em; vertical-align:middle; transform:scale(1.5);'>"
     }
   ],
   "subgamemodes": [
