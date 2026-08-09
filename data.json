@@ -170,7 +170,7 @@
         "axe": "LT1",
         "uhc": "LT1",
         "mace": "HT1",
-        "spearmace": "HT3",
+        "spearmace": "LT2",
         "crystal": {
           "tier": "HT1",
           "retired": true
@@ -206,7 +206,8 @@
         "nsmp": "HT2",
         "dpot": "HT3",
         "npot": "LT2",
-        "hsmp": "HT2"
+        "hsmp": "HT2",
+        "spearmace": "LT2"
       },
       "subtiers": {
         "pearl": "HT3",
@@ -313,7 +314,8 @@
         "nsmp": "HT2",
         "dpot": "HT3",
         "npot": "LT2",
-        "hsmp": "HT2"
+        "hsmp": "HT2",
+        "spearmace": "LT2"
       },
       "subtiers": {
         "pearl": "HT4",
