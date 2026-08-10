@@ -190,7 +190,7 @@
         "axe": "LT1",
         "uhc": "LT1",
         "mace": "HT1",
-        "spearmace": "LT2",
+        "spearmace": "HT2",
         "crystal": {
           "tier": "HT1",
           "retired": true
@@ -227,7 +227,7 @@
         "dpot": "HT3",
         "npot": "LT2",
         "hsmp": "HT2",
-        "spearmace": "LT2"
+        "spearmace": "HT2"
       },
       "subtiers": {
         "pearl": "HT3",
@@ -335,7 +335,7 @@
         "dpot": "HT3",
         "npot": "LT2",
         "hsmp": "HT2",
-        "spearmace": "LT2"
+        "spearmace": "HT2"
       },
       "subtiers": {
         "pearl": "HT4",
@@ -651,10 +651,14 @@
       "uuid": "4e2beabd-bb47-4b2b-80fb-06a8205cb4bb",
       "region": "",
       "tiers": {
-        "dsmp": "HT5",
+        "dsmp": "LT4",
         "hsmp": "LT5",
         "sword": "HT4",
-        "axe": "LT4"
+        "axe": "LT4",
+        "crystal": "LT3",
+        "nsmp": "LT4",
+        "uhc": "LT4",
+        "dpot": "HT5"
       }
     },
     {
