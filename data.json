@@ -170,7 +170,7 @@
         "axe": "LT1",
         "uhc": "LT1",
         "mace": "HT1",
-        "spearmace": "LT2",
+        "spearmace": "HT2",
         "crystal": {
           "tier": "HT1",
           "retired": true
