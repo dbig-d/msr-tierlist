@@ -13,34 +13,54 @@
   },
   "titles": [
     {
-      "min": 450,
+      "min": 600,
       "name": "Combat Grandmaster",
       "color": "#ffd76b"
     },
     {
-      "min": 350,
+      "min": 500,
       "name": "Combat Master",
       "color": "#7bc4ff"
     },
     {
-      "min": 250,
+      "min": 400,
       "name": "Combat Ace",
       "color": "#a974f0"
     },
     {
-      "min": 150,
+      "min": 350,
+      "name": "Combat Veteran",
+      "color": "#f0f054"
+    },
+    {
+      "min": 300,
       "name": "Combat Specialist",
+      "color": "#f05459"
+    },
+    {
+      "min": 250,
+      "name": "Combat Expert",
+      "color": "#f0a974"
+    },
+    {
+      "min": 200,
+      "name": "Combant Experienced",
       "color": "#54c66b"
     },
     {
-      "min": 80,
-      "name": "Combat Cadet",
-      "color": "#4670a0"
+      "min": 150,
+      "name": "Combat Apprentice",
+      "color": "#a0a0a0"
     },
     {
-      "min": 30,
+      "min": 100,
       "name": "Combat Novice",
       "color": "#8aa0bb"
+    },
+    {
+      "min": 50,
+      "name": "Combat Recruit",
+      "color": "#5a6e88"
     },
     {
       "min": 0,
