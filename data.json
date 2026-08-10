@@ -92,7 +92,7 @@
     {
       "id": "spearmace",
       "name": "Spear Mace",
-      "icon": "<img src='Images/Icons/Subtiers/Spear Mace.png' style='height:1em; vertical-align:middle; transform:scale(1.5);'>"
+      "icon": "<img src='Images/Icons/Spear Mace.png' style='height:1em; vertical-align:middle; transform:scale(1.5);'>"
     },
     {
       "id": "crystal",
