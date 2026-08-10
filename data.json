@@ -418,7 +418,8 @@
         "uhc": {
           "tier": "LT2",
           "retired": true
-        }
+        },
+        "spearmace": "HT3"
       },
       "subtiers": {
         "pearl": "HT5"
