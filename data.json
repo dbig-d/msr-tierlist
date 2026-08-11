@@ -675,8 +675,7 @@
       "region": "",
       "tiers": {
         "hsmp": "LT1",
-        "nsmp": "LT1",
-        "uhc": "HT2"
+        "nsmp": "LT1"
       }
     },
     {
