@@ -191,10 +191,7 @@
         "uhc": "LT1",
         "mace": "HT1",
         "spearmace": "HT2",
-        "crystal": {
-          "tier": "HT1",
-          "retired": true
-        },
+        "crystal": "HT1",
         "dsmp": "LT1",
         "nsmp": "LT1",
         "dpot": "HT1",
