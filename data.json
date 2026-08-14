@@ -382,9 +382,7 @@
       "premium": true,
       "subtester": "creeper",
       "house": "yellow",
-      "tiers": {
-        "hsmp": "LT3"
-      },
+      "tiers": {},
       "subtiers": {
         "creeper": "HT3"
       }
