@@ -383,9 +383,7 @@
       "subtester": "creeper",
       "house": "yellow",
       "tiers": {},
-      "subtiers": {
-        "creeper": "HT3"
-      }
+      "subtiers": {}
     },
     {
       "name": "CoolIcee",
