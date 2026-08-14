@@ -657,7 +657,8 @@
         "nsmp": "LT4",
         "uhc": "LT4",
         "dpot": "HT5",
-        "spearmace": "HT4"
+        "spearmace": "HT4",
+        "npot": "HT5"
       }
     },
     {
