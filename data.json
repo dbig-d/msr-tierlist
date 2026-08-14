@@ -658,7 +658,8 @@
         "uhc": "LT4",
         "dpot": "HT5",
         "spearmace": "HT4",
-        "npot": "HT5"
+        "npot": "HT5",
+        "mace": "HT5"
       }
     },
     {
