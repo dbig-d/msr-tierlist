@@ -383,7 +383,6 @@
       "subtester": "creeper",
       "house": "yellow",
       "tiers": {
-        "nsmp": "LT5",
         "dpot": "HT5",
         "npot": "HT5",
         "hsmp": "LT3"
