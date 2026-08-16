@@ -625,7 +625,8 @@
         "uhc": "LT4",
         "crystal": "LT2",
         "nsmp": "HT4",
-        "dpot": "HT5"
+        "dpot": "HT5",
+        "npot": "LT5"
       }
     },
     {
