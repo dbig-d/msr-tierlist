@@ -618,7 +618,8 @@
       "tiers": {
         "mace": "HT4",
         "dsmp": "LT4",
-        "hsmp": "LT5"
+        "hsmp": "LT5",
+        "sword": "HT4"
       }
     },
     {
