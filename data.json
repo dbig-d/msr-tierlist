@@ -830,7 +830,8 @@
       "tiers": {
         "sword": "LT3",
         "axe": "HT4",
-        "uhc": "HT4"
+        "uhc": "HT4",
+        "mace": "HT3"
       }
     }
   ]
