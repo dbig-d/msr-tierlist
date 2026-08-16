@@ -835,7 +835,8 @@
         "crystal": "LT2",
         "dsmp": "HT4",
         "nsmp": "LT5",
-        "npot": "HT5"
+        "npot": "HT5",
+        "dpot": "HT5"
       }
     }
   ]
