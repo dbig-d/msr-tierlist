@@ -828,7 +828,8 @@
       "name": "The_Duckenator",
       "region": "",
       "tiers": {
-        "sword": "LT3"
+        "sword": "LT3",
+        "axe": "HT4"
       }
     }
   ]
