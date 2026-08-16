@@ -843,6 +843,13 @@
         "dpot": "HT5",
         "hsmp": "LT3"
       }
+    },
+    {
+      "name": "LordZhou",
+      "region": "",
+      "tiers": {
+        "sword": "HT3"
+      }
     }
   ]
 }
