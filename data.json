@@ -308,7 +308,8 @@
         "nsmp": "LT3",
         "dpot": "HT4",
         "npot": "HT4",
-        "hsmp": "HT3"
+        "hsmp": "HT3",
+        "money": "HT1"
       },
       "house": "yellow",
       "subtiers": {
