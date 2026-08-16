@@ -196,7 +196,8 @@
         "nsmp": "LT1",
         "dpot": "HT1",
         "npot": "LT1",
-        "hsmp": "LT1"
+        "hsmp": "LT1",
+        "money": "LT1"
       },
       "subtiers": {
         "pearl": "HT3",
