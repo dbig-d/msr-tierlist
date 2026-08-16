@@ -836,7 +836,8 @@
         "dsmp": "HT4",
         "nsmp": "LT5",
         "npot": "HT5",
-        "dpot": "HT5"
+        "dpot": "HT5",
+        "hsmp": "LT3"
       }
     }
   ]
