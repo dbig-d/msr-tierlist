@@ -833,7 +833,8 @@
         "uhc": "HT4",
         "mace": "HT3",
         "crystal": "LT2",
-        "dsmp": "HT4"
+        "dsmp": "HT4",
+        "nsmp": "LT5"
       }
     }
   ]
