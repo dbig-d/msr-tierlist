@@ -823,6 +823,13 @@
       "house": "blue",
       "tester": true,
       "premium": true
+    },
+    {
+      "name": "The_Duckenator",
+      "region": "",
+      "tiers": {
+        "sword": "LT3"
+      }
     }
   ]
 }
