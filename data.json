@@ -404,7 +404,8 @@
           "tier": "LT2",
           "retired": true
         },
-        "spearmace": "HT3"
+        "spearmace": "HT3",
+        "money": "LT2"
       },
       "subtiers": {
         "pearl": "HT5"
