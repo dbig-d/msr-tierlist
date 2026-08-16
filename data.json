@@ -820,7 +820,8 @@
         "hsmp": "HT1",
         "mace": "HT2",
         "crystal": "LT2",
-        "uhc": "HT1"
+        "uhc": "HT1",
+        "money": "LT1"
       },
       "house": "blue",
       "tester": true,
