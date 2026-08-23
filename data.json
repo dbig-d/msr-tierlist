@@ -490,7 +490,8 @@
         "spearmace": "HT4",
         "nsmp": "HT4",
         "money": "LT3",
-        "dpot": "LT3"
+        "dpot": "LT3",
+        "npot": "LT4"
       },
       "subtiers": {
         "creeper": "LT3"
