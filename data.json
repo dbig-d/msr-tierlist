@@ -487,6 +487,9 @@
         "dsmp": "HT4",
         "hsmp": "LT4",
         "uhc": "LT3"
+      },
+      "subtiers": {
+        "creeper": "LT3"
       }
     },
     {
