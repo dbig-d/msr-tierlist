@@ -224,7 +224,10 @@
         "mace": "HT2",
         "crystal": "LT1",
         "dsmp": "HT2",
-        "nsmp": "HT2",
+        "nsmp": {
+          "tier": "HT2",
+          "retired": true
+        },
         "dpot": "LT2",
         "npot": "LT2",
         "hsmp": "HT2",
