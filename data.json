@@ -486,7 +486,8 @@
         "crystal": "HT2",
         "dsmp": "HT4",
         "hsmp": "LT4",
-        "uhc": "LT3"
+        "uhc": "LT3",
+        "spearmace": "HT4"
       },
       "subtiers": {
         "creeper": "LT3"
