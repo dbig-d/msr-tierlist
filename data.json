@@ -349,7 +349,10 @@
         "dpot": "HT3",
         "npot": "LT2",
         "hsmp": "HT2",
-        "spearmace": "HT2"
+        "spearmace": {
+          "tier": "HT2",
+          "retired": true
+        }
       },
       "subtiers": {
         "pearl": "HT4",
