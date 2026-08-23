@@ -215,7 +215,10 @@
       "subtester": "fireball",
       "house": "blue",
       "tiers": {
-        "sword": "LT1",
+        "sword": {
+          "tier": "LT1",
+          "retired": true
+        },
         "axe": "LT2",
         "uhc": "HT2",
         "mace": "HT2",
