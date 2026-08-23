@@ -222,7 +222,10 @@
         "axe": "LT2",
         "uhc": "HT2",
         "mace": "HT2",
-        "crystal": "LT1",
+        "crystal": {
+          "tier": "LT1",
+          "retired": true
+        },
         "dsmp": "HT2",
         "nsmp": {
           "tier": "HT2",
