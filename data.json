@@ -488,7 +488,8 @@
         "hsmp": "LT4",
         "uhc": "LT3",
         "spearmace": "HT4",
-        "nsmp": "HT4"
+        "nsmp": "HT4",
+        "money": "LT3"
       },
       "subtiers": {
         "creeper": "LT3"
