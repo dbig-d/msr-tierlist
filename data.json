@@ -359,7 +359,8 @@
         "uhc": "HT3",
         "mace": "LT4",
         "dpot": "LT2",
-        "hsmp": "HT4"
+        "hsmp": "HT4",
+        "crystal": "HT2"
       }
     },
     {
