@@ -234,7 +234,8 @@
         "dpot": "LT2",
         "npot": "LT2",
         "hsmp": "HT2",
-        "spearmace": "HT2"
+        "spearmace": "HT2",
+        "money": "LT1"
       },
       "subtiers": {
         "pearl": "HT3",
