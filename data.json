@@ -542,7 +542,6 @@
       "premium": true,
       "house": "red",
       "tiers": {
-        "sword": "HT1",
         "axe": "HT1",
         "uhc": "LT4",
         "mace": "HT5",
