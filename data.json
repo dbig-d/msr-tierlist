@@ -890,7 +890,8 @@
       "name": "aCxrvedPumpkin",
       "region": "",
       "tiers": {
-        "sword": "HT3"
+        "sword": "HT3",
+        "money": "HT3"
       }
     }
   ]
