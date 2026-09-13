@@ -445,7 +445,10 @@
           "tier": "LT2",
           "retired": true
         },
-        "spearmace": "LT2",
+        "spearmace": {
+          "tier": "LT2",
+          "retired": true
+        },
         "money": {
           "tier": "LT2",
           "retired": true
