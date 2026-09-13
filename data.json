@@ -437,7 +437,10 @@
           "tier": "LT2",
           "retired": true
         },
-        "hsmp": "LT2",
+        "hsmp": {
+          "tier": "LT2",
+          "retired": true
+        },
         "uhc": {
           "tier": "LT2",
           "retired": true
