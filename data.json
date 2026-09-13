@@ -429,7 +429,10 @@
           "retired": true
         },
         "mace": "LT2",
-        "dsmp": "HT2",
+        "dsmp": {
+          "tier": "HT2",
+          "retired": true
+        },
         "nsmp": "LT2",
         "hsmp": "LT2",
         "uhc": {
