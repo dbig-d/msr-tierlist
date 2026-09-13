@@ -272,7 +272,8 @@
         "nsmp": "LT2",
         "dpot": "LT2",
         "npot": "LT2",
-        "hsmp": "HT2"
+        "hsmp": "HT2",
+        "money": "HT3"
       },
       "subtiers": {
         "cart": "LT3",
