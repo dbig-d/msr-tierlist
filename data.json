@@ -420,7 +420,10 @@
       "developer": true,
       "house": "blue",
       "tiers": {
-        "sword": "LT2",
+        "sword": {
+          "tier": "LT2",
+          "retired": true
+        },
         "axe": "LT1",
         "mace": "LT2",
         "dsmp": "HT2",
