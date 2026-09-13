@@ -424,7 +424,10 @@
           "tier": "LT2",
           "retired": true
         },
-        "axe": "LT1",
+        "axe": {
+          "tier": "LT1",
+          "retired": true
+        },
         "mace": "LT2",
         "dsmp": "HT2",
         "nsmp": "LT2",
