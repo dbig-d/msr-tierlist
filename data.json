@@ -433,7 +433,10 @@
           "tier": "HT2",
           "retired": true
         },
-        "nsmp": "LT2",
+        "nsmp": {
+          "tier": "LT2",
+          "retired": true
+        },
         "hsmp": "LT2",
         "uhc": {
           "tier": "LT2",
