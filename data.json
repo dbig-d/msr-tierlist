@@ -446,7 +446,10 @@
           "retired": true
         },
         "spearmace": "LT2",
-        "money": "LT2"
+        "money": {
+          "tier": "LT2",
+          "retired": true
+        }
       },
       "subtiers": {
         "pearl": "HT5"
