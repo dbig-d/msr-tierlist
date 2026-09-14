@@ -222,7 +222,10 @@
           "tier": "HT1",
           "retired": true
         },
-        "npot": "LT1",
+        "npot": {
+          "tier": "LT1",
+          "retired": true
+        },
         "hsmp": "LT1",
         "money": "LT1"
       },
