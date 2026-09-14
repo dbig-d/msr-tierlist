@@ -214,7 +214,10 @@
           "tier": "LT1",
           "retired": true
         },
-        "nsmp": "LT1",
+        "nsmp": {
+          "tier": "LT1",
+          "retired": true
+        },
         "dpot": "HT1",
         "npot": "LT1",
         "hsmp": "LT1",
