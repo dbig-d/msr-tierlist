@@ -248,7 +248,10 @@
           "tier": "LT2",
           "retired": true
         },
-        "spleef": "LT2",
+        "spleef": {
+          "tier": "LT2",
+          "retired": true
+        },
         "fireball": {
           "tier": "LT2",
           "retired": true
