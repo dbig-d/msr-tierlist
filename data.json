@@ -237,7 +237,10 @@
       },
       "subtiers": {
         "pearl": "HT3",
-        "cart": "HT3",
+        "cart": {
+          "tier": "HT3",
+          "retired": true
+        },
         "creeper": "LT2",
         "spleef": "LT2",
         "fireball": "LT2"
