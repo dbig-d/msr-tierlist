@@ -186,7 +186,10 @@
       "subtester": "cart",
       "house": "blue",
       "tiers": {
-        "sword": "LT1",
+        "sword": {
+          "tier": "LT1",
+          "retired": true
+        },
         "axe": "LT1",
         "uhc": "LT1",
         "mace": "HT1",
