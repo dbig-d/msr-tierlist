@@ -230,7 +230,10 @@
           "tier": "LT1",
           "retired": true
         },
-        "money": "LT1"
+        "money": {
+          "tier": "LT1",
+          "retired": true
+        }
       },
       "subtiers": {
         "pearl": "HT3",
