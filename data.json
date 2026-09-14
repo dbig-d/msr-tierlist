@@ -236,7 +236,10 @@
         }
       },
       "subtiers": {
-        "pearl": "HT3",
+        "pearl": {
+          "tier": "HT3",
+          "retired": true
+        },
         "cart": {
           "tier": "HT3",
           "retired": true
