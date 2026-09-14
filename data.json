@@ -198,7 +198,10 @@
           "tier": "LT1",
           "retired": true
         },
-        "mace": "HT1",
+        "mace": {
+          "tier": "HT1",
+          "retired": true
+        },
         "spearmace": "LT1",
         "crystal": "HT1",
         "dsmp": "LT1",
