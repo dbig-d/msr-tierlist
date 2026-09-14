@@ -226,7 +226,10 @@
           "tier": "LT1",
           "retired": true
         },
-        "hsmp": "LT1",
+        "hsmp": {
+          "tier": "LT1",
+          "retired": true
+        },
         "money": "LT1"
       },
       "subtiers": {
