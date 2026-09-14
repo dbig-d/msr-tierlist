@@ -202,7 +202,10 @@
           "tier": "HT1",
           "retired": true
         },
-        "spearmace": "LT1",
+        "spearmace": {
+          "tier": "LT1",
+          "retired": true
+        },
         "crystal": "HT1",
         "dsmp": "LT1",
         "nsmp": "LT1",
