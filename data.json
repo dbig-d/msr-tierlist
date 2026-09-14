@@ -218,7 +218,10 @@
           "tier": "LT1",
           "retired": true
         },
-        "dpot": "HT1",
+        "dpot": {
+          "tier": "HT1",
+          "retired": true
+        },
         "npot": "LT1",
         "hsmp": "LT1",
         "money": "LT1"
