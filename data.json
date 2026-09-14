@@ -246,7 +246,10 @@
         },
         "creeper": "LT2",
         "spleef": "LT2",
-        "fireball": "LT2"
+        "fireball": {
+          "tier": "LT2",
+          "retired": true
+        }
       }
     },
     {
