@@ -194,7 +194,10 @@
           "tier": "LT1",
           "retired": true
         },
-        "uhc": "LT1",
+        "uhc": {
+          "tier": "LT1",
+          "retired": true
+        },
         "mace": "HT1",
         "spearmace": "LT1",
         "crystal": "HT1",
