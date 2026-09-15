@@ -719,7 +719,8 @@
         "dsmp": "HT4",
         "hsmp": "HT3",
         "mace": "HT4",
-        "crystal": "HT3"
+        "crystal": "HT3",
+        "nsmp": "HT3"
       }
     },
     {
