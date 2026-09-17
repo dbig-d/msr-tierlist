@@ -165,7 +165,10 @@
       "premium": true,
       "house": "red",
       "tiers": {
-        "sword": "LT1",
+        "sword": {
+          "tier": "LT1",
+          "retired": true
+        },
         "axe": "HT3",
         "uhc": "LT2",
         "mace": "LT3",
