@@ -173,7 +173,10 @@
           "tier": "HT3",
           "retired": true
         },
-        "uhc": "LT2",
+        "uhc": {
+          "tier": "LT2",
+          "retired": true
+        },
         "mace": "LT3",
         "crystal": "LT4",
         "dsmp": "LT2",
