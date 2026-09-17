@@ -179,7 +179,10 @@
         },
         "mace": "LT3",
         "crystal": "LT4",
-        "dsmp": "LT2",
+        "dsmp": {
+          "tier": "LT2",
+          "retired": true
+        },
         "nsmp": "HT3",
         "dpot": "LT1",
         "npot": "LT2",
