@@ -318,7 +318,10 @@
           "tier": "HT2",
           "retired": true
         },
-        "dpot": "HT2",
+        "dpot": {
+          "tier": "HT2",
+          "retired": true
+        },
         "npot": "LT2",
         "hsmp": "HT2",
         "spearmace": "HT2",
