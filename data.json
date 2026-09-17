@@ -183,7 +183,10 @@
           "tier": "LT2",
           "retired": true
         },
-        "nsmp": "HT3",
+        "nsmp": {
+          "tier": "HT3",
+          "retired": true
+        },
         "dpot": {
           "tier": "LT1",
           "retired": true
