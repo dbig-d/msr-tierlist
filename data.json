@@ -305,7 +305,10 @@
           "tier": "HT2",
           "retired": true
         },
-        "mace": "HT2",
+        "mace": {
+          "tier": "HT2",
+          "retired": true
+        },
         "crystal": {
           "tier": "LT1",
           "retired": true
