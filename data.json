@@ -300,10 +300,7 @@
           "tier": "LT1",
           "retired": true
         },
-        "axe": {
-          "tier": "LT2",
-          "retired": true
-        },
+        "axe": "LT2",
         "uhc": "HT2",
         "mace": "HT2",
         "crystal": {
