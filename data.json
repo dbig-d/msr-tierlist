@@ -323,7 +323,10 @@
           "retired": true
         },
         "npot": "LT2",
-        "hsmp": "HT2",
+        "hsmp": {
+          "tier": "HT2",
+          "retired": true
+        },
         "spearmace": "HT2",
         "money": {
           "tier": "LT1",
