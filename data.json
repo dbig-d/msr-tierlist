@@ -177,7 +177,10 @@
           "tier": "LT2",
           "retired": true
         },
-        "mace": "LT3",
+        "mace": {
+          "tier": "LT3",
+          "retired": true
+        },
         "crystal": "LT4",
         "dsmp": {
           "tier": "LT2",
