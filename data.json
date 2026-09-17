@@ -316,7 +316,10 @@
         "npot": "LT2",
         "hsmp": "HT2",
         "spearmace": "HT2",
-        "money": "LT1"
+        "money": {
+          "tier": "LT1",
+          "retired": true
+        }
       },
       "subtiers": {
         "pearl": "HT3",
