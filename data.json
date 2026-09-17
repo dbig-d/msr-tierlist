@@ -191,7 +191,10 @@
           "tier": "LT1",
           "retired": true
         },
-        "npot": "LT2",
+        "npot": {
+          "tier": "LT2",
+          "retired": true
+        },
         "hsmp": "LT2"
       }
     },
