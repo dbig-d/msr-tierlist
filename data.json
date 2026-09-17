@@ -181,7 +181,10 @@
           "tier": "LT3",
           "retired": true
         },
-        "crystal": "LT4",
+        "crystal": {
+          "tier": "LT4",
+          "retired": true
+        },
         "dsmp": {
           "tier": "LT2",
           "retired": true
