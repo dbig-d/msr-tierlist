@@ -1023,6 +1023,13 @@
         "sword": "HT3",
         "money": "HT3"
       }
+    },
+    {
+      "name": "Mixdified",
+      "region": "",
+      "tiers": {
+        "money": "LT3"
+      }
     }
   ]
 }
