@@ -1021,7 +1021,8 @@
       "region": "",
       "tiers": {
         "sword": "HT3",
-        "money": "HT3"
+        "money": "HT3",
+        "dpot": "HT3"
       }
     },
     {
